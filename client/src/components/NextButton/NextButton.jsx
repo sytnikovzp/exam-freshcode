@@ -1,14 +1,13 @@
-import React from 'react';
 import styles from './NextButton.module.sass';
 
-const NextButton = props => {
+function NextButton(props) {
   const { submit } = props;
 
   return (
-    <div onClick={submit} className={styles.buttonContainer}>
+    <div className={styles.buttonContainer} onClick={submit}>
       <span>Next</span>
     </div>
   );
-};
+}
 
 export default NextButton;

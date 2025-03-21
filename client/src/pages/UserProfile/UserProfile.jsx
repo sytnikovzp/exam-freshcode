@@ -1,16 +1,18 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
-import Header from '../../components/Header/Header';
-import styles from './UserProfile.module.sass';
+
 import CONSTANTS from '../../constants';
-import UserInfo from '../../components/UserInfo/UserInfo';
-import PayForm from '../../components/PayForm/PayForm';
+
 import { cashOut, clearPaymentStore } from '../../store/slices/paymentSlice';
 import { changeProfileViewMode } from '../../store/slices/userProfileSlice';
-import Error from '../../components/Error/Error';
 
-const UserProfile = (props) => {
+import Error from '../../components/Error/Error';
+import PayForm from '../../components/PayForm/PayForm';
+import UserInfo from '../../components/UserInfo/UserInfo';
+
+import styles from './UserProfile.module.sass';
+
+function UserProfile(props) {
   const pay = (values) => {
     const { number, expiry, cvc, sum } = values;
     props.cashOut({
@@ -69,9 +71,9 @@ const UserProfile = (props) => {
               <div>
                 {error && (
                   <Error
+                    clearError={clearPaymentStore}
                     data={error.data}
                     status={error.status}
-                    clearError={clearPaymentStore}
                   />
                 )}
                 <PayForm sendRequest={pay} />
@@ -82,7 +84,7 @@ const UserProfile = (props) => {
       </div>
     </div>
   );
-};
+}
 
 const mapStateToProps = (state) => {
   const { balance, role } = state.userStore.data;

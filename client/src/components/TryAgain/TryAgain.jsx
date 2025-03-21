@@ -1,7 +1,6 @@
-import React from 'react';
 import styles from './TryAgain.module.sass';
 
-const TryAgain = props => {
+function TryAgain(props) {
   const { getData } = props;
   return (
     <div className={styles.container}>
@@ -9,6 +8,6 @@ const TryAgain = props => {
       <i className='fas fa-redo' onClick={() => getData()} />
     </div>
   );
-};
+}
 
 export default TryAgain;

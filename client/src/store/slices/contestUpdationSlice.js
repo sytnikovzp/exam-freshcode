@@ -1,12 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { updateStoreAfterUpdateContest } from './contestByIdSlice';
-import * as restController from '../../api/rest/restController';
+
 import {
   decorateAsyncThunk,
-  pendingReducer,
   fulfilledReducer,
+  pendingReducer,
   rejectedReducer,
 } from '../../utils/store';
+import * as restController from '../../api/rest/restController';
+
+import { updateStoreAfterUpdateContest } from './contestByIdSlice';
 
 const CONTEST_UPDATION_SLICE_NAME = 'contestUpdation';
 
@@ -27,7 +29,7 @@ const reducers = {
   clearContestUpdationStore: () => initialState,
 };
 
-const extraReducers = builder => {
+const extraReducers = (builder) => {
   builder.addCase(updateContest.pending, pendingReducer);
   builder.addCase(updateContest.fulfilled, fulfilledReducer);
   builder.addCase(updateContest.rejected, rejectedReducer);

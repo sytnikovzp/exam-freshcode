@@ -1,22 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
-import DialogListContainer from '../../DialogComponents/DialogListContainer/DialogListContainer';
-import styles from './Chat.module.sass';
-import Dialog from '../../DialogComponents/Dialog/Dialog';
+
+import CONSTANTS from '../../../../constants';
+import { chatController } from '../../../../api/ws/socketController';
+
 import {
   changeChatShow,
-  setPreviewChatMode,
   changeShowModeCatalog,
   clearChatError,
   getPreviewChat,
+  setPreviewChatMode,
 } from '../../../../store/slices/chatSlice';
-import { chatController } from '../../../../api/ws/socketController';
-import CONSTANTS from '../../../../constants';
-import CatalogListContainer from '../../CatalogComponents/CatalogListContainer/CatalogListContainer';
-import CatalogCreation from '../../CatalogComponents/CatalogCreation/CatalogCreation';
-import CatalogListHeader from '../../CatalogComponents/CatalogListHeader/CatalogListHeader';
+
 import ChatError from '../../../ChatError/ChatError';
+import CatalogCreation from '../../CatalogComponents/CatalogCreation/CatalogCreation';
+import CatalogListContainer from '../../CatalogComponents/CatalogListContainer/CatalogListContainer';
+import CatalogListHeader from '../../CatalogComponents/CatalogListHeader/CatalogListHeader';
+import Dialog from '../../DialogComponents/Dialog/Dialog';
+import DialogListContainer from '../../DialogComponents/DialogListContainer/DialogListContainer';
+
+import styles from './Chat.module.sass';
 
 class Chat extends React.Component {
   componentDidMount() {
@@ -43,40 +47,40 @@ class Chat extends React.Component {
         {isShowChatsInCatalog && <CatalogListHeader />}
         {!isShowChatsInCatalog && (
           <div className={styles.chatHeader}>
-            <img src={`${CONSTANTS.STATIC_IMAGES_PATH}logo.png`} alt="logo" />
+            <img alt='logo' src={`${CONSTANTS.STATIC_IMAGES_PATH}logo.png`} />
           </div>
         )}
         {!isShowChatsInCatalog && (
           <div className={styles.buttonsContainer}>
             <span
-              onClick={() => setChatPreviewMode(NORMAL_PREVIEW_CHAT_MODE)}
               className={classNames(styles.button, {
                 [styles.activeButton]: chatMode === NORMAL_PREVIEW_CHAT_MODE,
               })}
+              onClick={() => setChatPreviewMode(NORMAL_PREVIEW_CHAT_MODE)}
             >
               Normal
             </span>
             <span
-              onClick={() => setChatPreviewMode(FAVORITE_PREVIEW_CHAT_MODE)}
               className={classNames(styles.button, {
                 [styles.activeButton]: chatMode === FAVORITE_PREVIEW_CHAT_MODE,
               })}
+              onClick={() => setChatPreviewMode(FAVORITE_PREVIEW_CHAT_MODE)}
             >
               Favorite
             </span>
             <span
-              onClick={() => setChatPreviewMode(BLOCKED_PREVIEW_CHAT_MODE)}
               className={classNames(styles.button, {
                 [styles.activeButton]: chatMode === BLOCKED_PREVIEW_CHAT_MODE,
               })}
+              onClick={() => setChatPreviewMode(BLOCKED_PREVIEW_CHAT_MODE)}
             >
               Blocked
             </span>
             <span
-              onClick={() => setChatPreviewMode(CATALOG_PREVIEW_CHAT_MODE)}
               className={classNames(styles.button, {
                 [styles.activeButton]: chatMode === CATALOG_PREVIEW_CHAT_MODE,
               })}
+              onClick={() => setChatPreviewMode(CATALOG_PREVIEW_CHAT_MODE)}
             >
               Catalog
             </span>

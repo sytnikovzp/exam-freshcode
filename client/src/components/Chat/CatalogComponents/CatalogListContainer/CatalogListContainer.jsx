@@ -1,11 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
+
 import {
   getCatalogList,
   removeChatFromCatalog,
 } from '../../../../store/slices/chatSlice';
-import CatalogList from '../CatalogList/CatalogList';
+
 import DialogList from '../../DialogComponents/DialogList/DialogList';
+import CatalogList from '../CatalogList/CatalogList';
 
 class CatalogListContainer extends React.Component {
   componentDidMount() {
@@ -39,9 +41,9 @@ class CatalogListContainer extends React.Component {
       <>
         {isShowChatsInCatalog ? (
           <DialogList
-            userId={id}
             preview={this.getDialogsPreview()}
             removeChat={this.removeChatFromCatalog}
+            userId={id}
           />
         ) : (
           <CatalogList catalogList={catalogList} />

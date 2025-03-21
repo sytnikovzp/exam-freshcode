@@ -1,29 +1,34 @@
 import React from 'react';
+import LightBox from 'react-18-image-lightbox';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import isEqual from 'lodash/isEqual';
-import LightBox from 'react-18-image-lightbox';
-import withRouter from '../../hocs/withRouter';
+
+import CONSTANTS from '../../constants';
+
 import { goToExpandedDialog } from '../../store/slices/chatSlice';
 import {
+  changeContestViewMode,
+  changeEditContest,
+  changeShowImage,
+  clearSetOfferStatusError,
   getContestById,
   setOfferStatus,
-  clearSetOfferStatusError,
-  changeEditContest,
-  changeContestViewMode,
-  changeShowImage,
 } from '../../store/slices/contestByIdSlice';
-import Header from '../../components/Header/Header';
+
+import Brief from '../../components/Brief/Brief';
 import ContestSideBar from '../../components/ContestSideBar/ContestSideBar';
-import styles from './ContestPage.module.sass';
+import Error from '../../components/Error/Error';
 import OfferBox from '../../components/OfferBox/OfferBox';
 import OfferForm from '../../components/OfferForm/OfferForm';
-import CONSTANTS from '../../constants';
-import Brief from '../../components/Brief/Brief';
 import Spinner from '../../components/Spinner/Spinner';
 import TryAgain from '../../components/TryAgain/TryAgain';
+
+import withRouter from '../../hocs/withRouter';
+
+import styles from './ContestPage.module.sass';
+
 import 'react-18-image-lightbox/style.css';
-import Error from '../../components/Error/Error';
 
 class ContestPage extends React.Component {
   componentWillUnmount() {
@@ -44,12 +49,12 @@ class ContestPage extends React.Component {
     for (let i = 0; i < this.props.contestByIdStore.offers.length; i++) {
       array.push(
         <OfferBox
-          data={this.props.contestByIdStore.offers[i]}
           key={this.props.contestByIdStore.offers[i].id}
+          contestType={this.props.contestByIdStore.contestData.contestType}
+          data={this.props.contestByIdStore.offers[i]}
+          date={new Date()}
           needButtons={this.needButtons}
           setOfferStatus={this.setOfferStatus}
-          contestType={this.props.contestByIdStore.contestData.contestType}
-          date={new Date()}
         />
       );
     }
@@ -158,18 +163,18 @@ class ContestPage extends React.Component {
             <div className={styles.infoContainer}>
               <div className={styles.buttonsContainer}>
                 <span
-                  onClick={() => changeContestViewMode(true)}
                   className={classNames(styles.btn, {
                     [styles.activeBtn]: isBrief,
                   })}
+                  onClick={() => changeContestViewMode(true)}
                 >
                   Brief
                 </span>
                 <span
-                  onClick={() => changeContestViewMode(false)}
                   className={classNames(styles.btn, {
                     [styles.activeBtn]: !isBrief,
                   })}
+                  onClick={() => changeContestViewMode(false)}
                 >
                   Offer
                 </span>
@@ -177,24 +182,24 @@ class ContestPage extends React.Component {
               {isBrief ? (
                 <Brief
                   contestData={contestData}
-                  role={role}
                   goChat={this.goChat}
+                  role={role}
                 />
               ) : (
                 <div className={styles.offersContainer}>
                   {role === CONSTANTS.CREATOR &&
                     contestData.status === CONSTANTS.CONTEST_STATUS_ACTIVE && (
                       <OfferForm
-                        contestType={contestData.contestType}
                         contestId={contestData.id}
+                        contestType={contestData.contestType}
                         customerId={contestData.User.id}
                       />
                     )}
                   {setOfferStatusError && (
                     <Error
+                      clearError={clearSetOfferStatusError}
                       data={setOfferStatusError.data}
                       status={setOfferStatusError.status}
-                      clearError={clearSetOfferStatusError}
                     />
                   )}
                   <div className={styles.offers}>{this.setOffersList()}</div>
@@ -227,4 +232,7 @@ const mapDispatchToProps = (dispatch) => ({
   changeShowImage: (data) => dispatch(changeShowImage(data)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ContestPage));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(ContestPage));

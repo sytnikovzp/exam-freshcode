@@ -1,8 +1,8 @@
-import React from 'react';
-import styles from './BundleBox.module.sass';
 import CONSTANTS from '../../constants';
 
-const BundleBox = props => {
+import styles from './BundleBox.module.sass';
+
+function BundleBox(props) {
   const defaultPathToImages = `${CONSTANTS.STATIC_IMAGES_PATH}contestLabels/`;
 
   const renderImage = () => {
@@ -10,10 +10,10 @@ const BundleBox = props => {
     for (let i = 0; i < props.path.length; i++) {
       array.push(
         <img
-          src={defaultPathToImages + props.path[i]}
           key={i}
-          className={styles.imgContainer}
           alt={props.path[i].replace(/.png/g, 'Contest')}
+          className={styles.imgContainer}
+          src={defaultPathToImages + props.path[i]}
         />
       );
     }
@@ -23,9 +23,8 @@ const BundleBox = props => {
   const mouseOverHandler = () => {
     const element = document.getElementById(props.header);
     for (let i = 0; i < element.children[0].children.length; i++) {
-      element.children[0].children[
-        i
-      ].src = `${defaultPathToImages}blue_${props.path[i]}`;
+      element.children[0].children[i].src =
+        `${defaultPathToImages}blue_${props.path[i]}`;
     }
   };
 
@@ -42,11 +41,11 @@ const BundleBox = props => {
   const { setBundle, header, describe } = props;
   return (
     <div
-      onMouseOver={mouseOverHandler}
-      onMouseOut={mouseOutHandler}
-      onClick={() => setBundle(header)}
-      id={header}
       className={styles.bundleContainer + getBackClass()}
+      id={header}
+      onClick={() => setBundle(header)}
+      onMouseOut={mouseOutHandler}
+      onMouseOver={mouseOverHandler}
     >
       <div>{renderImage()}</div>
       <div className={styles.infoContainer}>
@@ -56,6 +55,6 @@ const BundleBox = props => {
       </div>
     </div>
   );
-};
+}
 
 export default BundleBox;

@@ -1,12 +1,15 @@
-import React from 'react';
 import { connect } from 'react-redux';
-import UpdateUserInfoForm from '../UpdateUserInfoForm/UpdateUserInfoForm';
-import { updateUser } from '../../store/slices/userSlice';
-import { changeEditModeOnUserProfile } from '../../store/slices/userProfileSlice';
+
 import CONSTANTS from '../../constants';
+
+import { changeEditModeOnUserProfile } from '../../store/slices/userProfileSlice';
+import { updateUser } from '../../store/slices/userSlice';
+
+import UpdateUserInfoForm from '../UpdateUserInfoForm/UpdateUserInfoForm';
+
 import styles from './UserInfo.module.sass';
 
-const UserInfo = (props) => {
+function UserInfo(props) {
   const updateUserData = (values) => {
     const formData = new FormData();
     formData.append('file', values.file);
@@ -26,13 +29,13 @@ const UserInfo = (props) => {
       ) : (
         <div className={styles.infoContainer}>
           <img
+            alt='user'
+            className={styles.avatar}
             src={
               avatar === 'anon.png'
                 ? CONSTANTS.ANONYM_IMAGE_PATH
                 : `${CONSTANTS.publicURL}${avatar}`
             }
-            className={styles.avatar}
-            alt="user"
           />
           <div className={styles.infoContainer}>
             <div className={styles.infoBlock}>
@@ -65,14 +68,14 @@ const UserInfo = (props) => {
         </div>
       )}
       <div
-        onClick={() => changeEditMode(!isEdit)}
         className={styles.buttonEdit}
+        onClick={() => changeEditMode(!isEdit)}
       >
         {isEdit ? 'Cancel' : 'Edit'}
       </div>
     </div>
   );
-};
+}
 
 const mapStateToProps = (state) => {
   const { data } = state.userStore;

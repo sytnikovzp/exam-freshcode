@@ -158,8 +158,8 @@ export default [
           detectObjects: false,
           enforceConst: true,
           ignore: [
-            -2, -1, 0, 1, 2, 3, 5, 6, 8, 15, 16, 20, 25, 31, 80, 100, 200, 256,
-            401, 404, 500, 3000,
+            -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 15, 16, 20, 25, 31, 80, 100, 200,
+            256, 400, 401, 403, 404, 406, 409, 500, 504, 3000,
           ],
           ignoreArrayIndexes: true,
         },
@@ -462,6 +462,11 @@ export default [
       'yield-star-spacing': 'warn',
       yoda: 'error',
       'func-names': ['warn', 'always'],
+      'react/prefer-stateless-function': [
+        'error',
+        { ignorePureComponents: true },
+      ],
+      'react/destructuring-assignment': ['error', 'always'],
       // 'react/no-array-index-key': 'warn',
       // 'react/jsx-no-bind': ['warn', { allowArrowFunctions: false }],
     },

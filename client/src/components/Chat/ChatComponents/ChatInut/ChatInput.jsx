@@ -1,13 +1,16 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import { Form, Formik } from 'formik';
-import { sendMessage } from '../../../../store/slices/chatSlice';
-import styles from './ChatInput.module.sass';
+
 import CONSTANTS from '../../../../constants';
-import FormInput from '../../../FormInput/FormInput';
 import Schems from '../../../../utils/validators/validationSchems';
 
-const ChatInput = (props) => {
+import { sendMessage } from '../../../../store/slices/chatSlice';
+
+import FormInput from '../../../FormInput/FormInput';
+
+import styles from './ChatInput.module.sass';
+
+function ChatInput(props) {
   const submitHandler = (values, { resetForm }) => {
     props.sendMessage({
       messageBody: values.message,
@@ -20,32 +23,32 @@ const ChatInput = (props) => {
   return (
     <div className={styles.inputContainer}>
       <Formik
-        onSubmit={submitHandler}
         initialValues={{ message: '' }}
         validationSchema={Schems.MessageSchema}
+        onSubmit={submitHandler}
       >
         <Form className={styles.form}>
           <FormInput
-            name="message"
-            type="text"
-            label="message"
             classes={{
               container: styles.container,
               input: styles.input,
               notValid: styles.notValid,
             }}
+            label='message'
+            name='message'
+            type='text'
           />
-          <button type="submit">
+          <button type='submit'>
             <img
+              alt='send Message'
               src={`${CONSTANTS.STATIC_IMAGES_PATH}send.png`}
-              alt="send Message"
             />
           </button>
         </Form>
       </Formik>
     </div>
   );
-};
+}
 
 const mapStateToProps = (state) => {
   const { interlocutor } = state.chatStore;

@@ -1,11 +1,11 @@
-import React from 'react';
 import CONSTANTS from '../../constants';
-import SelectInput from '../SelectInput/SelectInput';
-import FormInput from '../FormInput/FormInput';
+
 import styles from '../ContestForm/ContestForm.module.sass';
+import FormInput from '../FormInput/FormInput';
+import SelectInput from '../SelectInput/SelectInput';
 import Spinner from '../Spinner/Spinner';
 
-const OptionalSelects = props => {
+function OptionalSelects(props) {
   if (props.isFetching) {
     return <Spinner />;
   }
@@ -14,25 +14,25 @@ const OptionalSelects = props => {
       return (
         <>
           <SelectInput
-            name='typeOfName'
-            header='type of company'
             classes={{
               inputContainer: styles.selectInputContainer,
               inputHeader: styles.selectHeader,
               selectInput: styles.select,
               warning: styles.warning,
             }}
+            header='type of company'
+            name='typeOfName'
             optionsArray={props.dataForContest.data.typeOfName}
           />
           <SelectInput
-            name='styleName'
-            header='Style name'
             classes={{
               inputContainer: styles.selectInputContainer,
               inputHeader: styles.selectHeader,
               selectInput: styles.select,
               warning: styles.warning,
             }}
+            header='Style name'
+            name='styleName'
             optionsArray={props.dataForContest.data.nameStyle}
           />
         </>
@@ -46,18 +46,17 @@ const OptionalSelects = props => {
               What name of your venture?
             </span>
             <FormInput
-              name='nameVenture'
-              type='text'
-              label='name of venture'
               classes={{
                 container: styles.componentInputContainer,
                 input: styles.input,
                 warning: styles.warning,
               }}
+              label='name of venture'
+              name='nameVenture'
+              type='text'
             />
           </div>
           <SelectInput
-            name='brandStyle'
             classes={{
               inputContainer: styles.selectInputContainer,
               inputHeader: styles.selectHeader,
@@ -65,6 +64,7 @@ const OptionalSelects = props => {
               warning: styles.warning,
             }}
             header='Brand Style'
+            name='brandStyle'
             optionsArray={props.dataForContest.data.brandStyle}
           />
         </>
@@ -78,18 +78,17 @@ const OptionalSelects = props => {
               What name of your venture?
             </span>
             <FormInput
-              name='nameVenture'
-              type='text'
-              label='name of venture'
               classes={{
                 container: styles.componentInputContainer,
                 input: styles.input,
                 warning: styles.warning,
               }}
+              label='name of venture'
+              name='nameVenture'
+              type='text'
             />
           </div>
           <SelectInput
-            name='typeOfTagline'
             classes={{
               inputContainer: styles.selectInputContainer,
               inputHeader: styles.selectHeader,
@@ -97,12 +96,13 @@ const OptionalSelects = props => {
               warning: styles.warning,
             }}
             header='Type tagline'
+            name='typeOfTagline'
             optionsArray={props.dataForContest.data.typeOfTagline}
           />
         </>
       );
     }
   }
-};
+}
 
 export default OptionalSelects;

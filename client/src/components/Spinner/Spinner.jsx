@@ -1,5 +1,5 @@
-import React from 'react';
 import { ClipLoader } from 'react-spinners';
+
 // import { css } from '@emotion/core';
 import styles from './Spinner.module.sass';
 
@@ -7,16 +7,18 @@ import styles from './Spinner.module.sass';
   border-color: #46568a;
 `; */
 
-const SpinnerLoader = () => (
-  <div className={styles.loaderContainer}>
-    <ClipLoader
-      sizeUnit='px'
-      // css={override}
-      size={50}
-      color='#46568a'
-      loading
-    />
-  </div>
-);
+function SpinnerLoader() {
+  return (
+    <div className={styles.loaderContainer}>
+      <ClipLoader
+        loading
+        color='#46568a'
+        size={50}
+        sizeUnit='px'
+        // css={override}
+      />
+    </div>
+  );
+}
 
 export default SpinnerLoader;

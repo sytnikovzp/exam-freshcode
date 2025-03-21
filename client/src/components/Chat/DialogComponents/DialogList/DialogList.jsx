@@ -1,17 +1,20 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
+
 import CONSTANTS from '../../../../constants';
+
 import {
-  goToExpandedDialog,
-  changeChatFavorite,
   changeChatBlock,
+  changeChatFavorite,
   changeShowAddChatToCatalogMenu,
+  goToExpandedDialog,
 } from '../../../../store/slices/chatSlice';
+
 import DialogBox from '../DialogBox/DialogBox';
+
 import styles from './DialogList.module.sass';
 
-const DialogList = (props) => {
+function DialogList(props) {
   const changeFavorite = (data, event) => {
     props.changeChatFavorite(data);
     event.stopPropagation();
@@ -35,39 +38,38 @@ const DialogList = (props) => {
 
   const getTimeStr = (time) => {
     const currentTime = moment();
-    if (currentTime.isSame(time, 'day')) return moment(time).format('HH:mm');
-    if (currentTime.isSame(time, 'week')) return moment(time).format('dddd');
-    if (currentTime.isSame(time, 'year')) return moment(time).format('MM DD');
+    if (currentTime.isSame(time, 'day')) {
+      return moment(time).format('HH:mm');
+    }
+    if (currentTime.isSame(time, 'week')) {
+      return moment(time).format('dddd');
+    }
+    if (currentTime.isSame(time, 'year')) {
+      return moment(time).format('MM DD');
+    }
     return moment(time).format('MMMM DD, YYYY');
   };
 
   const renderPreview = (filterFunc) => {
     const arrayList = [];
-    const {
-      userId,
-      preview,
-      goToExpandedDialog,
-      chatMode,
-      removeChat,
-      interlocutor,
-    } = props;
-    preview.forEach((chatPreview, index) => {
+    const { userId, preview, goToExpandedDialog, chatMode, removeChat } = props;
+    for (const [index, chatPreview] of preview.entries()) {
       const dialogNode = (
         <DialogBox
-          interlocutor={chatPreview.interlocutor}
-          chatPreview={chatPreview}
-          userId={userId}
           key={index}
-          getTimeStr={getTimeStr}
-          changeFavorite={changeFavorite}
-          changeBlackList={changeBlackList}
-          chatMode={chatMode}
           catalogOperation={
             chatMode === CONSTANTS.CATALOG_PREVIEW_CHAT_MODE
               ? removeChat
               : changeShowCatalogCreation
           }
+          changeBlackList={changeBlackList}
+          changeFavorite={changeFavorite}
+          chatMode={chatMode}
+          chatPreview={chatPreview}
+          getTimeStr={getTimeStr}
           goToExpandedDialog={goToExpandedDialog}
+          interlocutor={chatPreview.interlocutor}
+          userId={userId}
         />
       );
       if (filterFunc && filterFunc(chatPreview, userId)) {
@@ -75,7 +77,7 @@ const DialogList = (props) => {
       } else if (!filterFunc) {
         arrayList.push(dialogNode);
       }
-    });
+    }
     return arrayList.length ? (
       arrayList
     ) : (
@@ -85,15 +87,17 @@ const DialogList = (props) => {
 
   const renderChatPreview = () => {
     const { chatMode } = props;
-    if (chatMode === CONSTANTS.FAVORITE_PREVIEW_CHAT_MODE)
+    if (chatMode === CONSTANTS.FAVORITE_PREVIEW_CHAT_MODE) {
       return renderPreview(onlyFavoriteDialogs);
-    if (chatMode === CONSTANTS.BLOCKED_PREVIEW_CHAT_MODE)
+    }
+    if (chatMode === CONSTANTS.BLOCKED_PREVIEW_CHAT_MODE) {
       return renderPreview(onlyBlockDialogs);
+    }
     return renderPreview();
   };
 
   return <div className={styles.previewContainer}>{renderChatPreview()}</div>;
-};
+}
 
 const mapStateToProps = (state) => state.chatStore;
 

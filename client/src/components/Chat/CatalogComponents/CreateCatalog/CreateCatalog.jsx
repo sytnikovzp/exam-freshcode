@@ -1,12 +1,15 @@
-import React from 'react';
 import { connect } from 'react-redux';
-import { Formik, Form } from 'formik';
-import FormInput from '../../../FormInput/FormInput';
-import styles from './CreateCatalog.module.sass';
-import { createCatalog } from '../../../../store/slices/chatSlice';
+import { Form, Formik } from 'formik';
+
 import Schems from '../../../../utils/validators/validationSchems';
 
-const CreateCatalog = (props) => {
+import { createCatalog } from '../../../../store/slices/chatSlice';
+
+import FormInput from '../../../FormInput/FormInput';
+
+import styles from './CreateCatalog.module.sass';
+
+function CreateCatalog(props) {
   const click = (values) => {
     const { createCatalog } = props;
     const { addChatId } = props;
@@ -14,27 +17,27 @@ const CreateCatalog = (props) => {
   };
   return (
     <Formik
-      onSubmit={click}
       initialValues={{ catalogName: '' }}
       validationSchema={Schems.CatalogSchema}
+      onSubmit={click}
     >
       <Form className={styles.form}>
         <FormInput
-          name="catalogName"
-          type="text"
-          label="name of catalog"
           classes={{
             container: styles.inputContainer,
             input: styles.input,
             warning: styles.fieldWarning,
             notValid: styles.notValid,
           }}
+          label='name of catalog'
+          name='catalogName'
+          type='text'
         />
-        <button type="submit">Create Catalog</button>
+        <button type='submit'>Create Catalog</button>
       </Form>
     </Formik>
   );
-};
+}
 
 const mapDispatchToProps = (dispatch) => ({
   createCatalog: (data) => dispatch(createCatalog(data)),

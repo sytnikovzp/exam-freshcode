@@ -1,14 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
-import * as restController from '../../api/rest/restController';
-import { clearContestStore } from './contestCreationSlice';
-import { changeProfileViewMode } from './userProfileSlice';
-import { updateUser } from './userSlice';
+
 import CONSTANTS from '../../constants';
 import {
   decorateAsyncThunk,
   pendingReducer,
   rejectedReducer,
 } from '../../utils/store';
+import * as restController from '../../api/rest/restController';
+
+import { clearContestStore } from './contestCreationSlice';
+import { changeProfileViewMode } from './userProfileSlice';
+import { updateUser } from './userSlice';
 
 const PAYMENT_SLICE_NAME = 'payment';
 
@@ -43,7 +45,7 @@ const reducers = {
   clearPaymentStore: () => initialState,
 };
 
-const extraReducers = builder => {
+const extraReducers = (builder) => {
   builder.addCase(pay.pending, pendingReducer);
   builder.addCase(pay.fulfilled, () => initialState);
   builder.addCase(pay.rejected, rejectedReducer);

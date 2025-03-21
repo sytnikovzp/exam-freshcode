@@ -1,12 +1,12 @@
-import { defineConfig, transformWithEsbuild } from 'vite';
 import react from '@vitejs/plugin-react';
 import browserslistToEsbuild from 'browserslist-to-esbuild';
+import { defineConfig, transformWithEsbuild } from 'vite';
 
 export default defineConfig({
   plugins: [
     {
       name: 'transform-js-to-jsx',
-      async transform(code, id) {
+      transform(code, id) {
         if (!id.match(/src\/.*\.js$/)) {
           return null;
         }

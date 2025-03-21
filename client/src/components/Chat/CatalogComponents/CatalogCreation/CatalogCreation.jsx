@@ -1,15 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
+
 import CONSTANTS from '../../../../constants';
+
 import {
-  changeTypeOfChatAdding,
   changeShowAddChatToCatalogMenu,
+  changeTypeOfChatAdding,
   getCatalogList,
 } from '../../../../store/slices/chatSlice';
-import styles from './CatalogCreation.module.sass';
+
 import AddToCatalog from '../AddToCatalog/AddToCatalog';
 import CreateCatalog from '../CreateCatalog/CreateCatalog';
+
+import styles from './CatalogCreation.module.sass';
 
 class CatalogCreation extends React.Component {
   componentDidMount() {
@@ -30,27 +34,27 @@ class CatalogCreation extends React.Component {
         {!isFetching && (
           <div className={styles.catalogCreationContainer}>
             <i
-              className="far fa-times-circle"
+              className='far fa-times-circle'
               onClick={() => changeShowAddChatToCatalogMenu()}
             />
             <div className={styles.buttonsContainer}>
               <span
-                onClick={() => changeTypeOfChatAdding(ADD_CHAT_TO_OLD_CATALOG)}
                 className={classNames({
                   [styles.active]:
                     catalogCreationMode === ADD_CHAT_TO_OLD_CATALOG,
                 })}
+                onClick={() => changeTypeOfChatAdding(ADD_CHAT_TO_OLD_CATALOG)}
               >
                 Old
               </span>
               <span
-                onClick={() =>
-                  changeTypeOfChatAdding(CREATE_NEW_CATALOG_AND_ADD_CHAT)
-                }
                 className={classNames({
                   [styles.active]:
                     catalogCreationMode === CREATE_NEW_CATALOG_AND_ADD_CHAT,
                 })}
+                onClick={() =>
+                  changeTypeOfChatAdding(CREATE_NEW_CATALOG_AND_ADD_CHAT)
+                }
               >
                 New
               </span>

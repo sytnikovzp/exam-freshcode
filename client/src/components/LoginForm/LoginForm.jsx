@@ -1,12 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Field, Form, Formik } from 'formik';
-import { checkAuth, clearAuth } from '../../store/slices/authSlice';
-import styles from './LoginForm.module.sass';
-import FormInput from '../FormInput/FormInput';
-import Schems from '../../utils/validators/validationSchems';
-import Error from '../Error/Error';
+import { Form, Formik } from 'formik';
+
 import CONSTANTS from '../../constants';
+import Schems from '../../utils/validators/validationSchems';
+
+import { checkAuth, clearAuth } from '../../store/slices/authSlice';
+
+import Error from '../Error/Error';
+import FormInput from '../FormInput/FormInput';
+
+import styles from './LoginForm.module.sass';
 
 class LoginForm extends React.Component {
   componentWillUnmount() {
@@ -33,9 +37,9 @@ class LoginForm extends React.Component {
       <div className={styles.loginForm}>
         {error && (
           <Error
+            clearError={authClear}
             data={error.data}
             status={error.status}
-            clearError={authClear}
           />
         )}
         <h2>LOGIN TO YOUR ACCOUNT</h2>
@@ -44,26 +48,26 @@ class LoginForm extends React.Component {
             email: '',
             password: '',
           }}
-          onSubmit={this.clicked}
           validationSchema={Schems.LoginSchem}
+          onSubmit={this.clicked}
         >
           <Form>
             <FormInput
               classes={formInputClasses}
-              name="email"
-              type="text"
-              label="Email Address"
+              label='Email Address'
+              name='email'
+              type='text'
             />
             <FormInput
               classes={formInputClasses}
-              name="password"
-              type="password"
-              label="Password"
+              label='Password'
+              name='password'
+              type='password'
             />
             <button
-              type="submit"
-              disabled={submitting}
               className={styles.submitContainer}
+              disabled={submitting}
+              type='submit'
             >
               <span className={styles.inscription}>
                 {isFetching ? 'Submitting...' : 'LOGIN'}
@@ -83,7 +87,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   loginRequest: ({ data, navigate }) =>
-    dispatch(checkAuth({ data, navigate, authMode: CONSTANTS.AUTH_MODE.LOGIN })),
+    dispatch(
+      checkAuth({ data, navigate, authMode: CONSTANTS.AUTH_MODE.LOGIN })
+    ),
   authClear: () => dispatch(clearAuth()),
 });
 

@@ -1,15 +1,17 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
-import {
-  backToDialogList,
-  changeChatFavorite,
-  changeChatBlock,
-} from '../../../../store/slices/chatSlice';
-import styles from './ChatHeader.module.sass';
+
 import CONSTANTS from '../../../../constants';
 
-const ChatHeader = (props) => {
+import {
+  backToDialogList,
+  changeChatBlock,
+  changeChatFavorite,
+} from '../../../../store/slices/chatSlice';
+
+import styles from './ChatHeader.module.sass';
+
+function ChatHeader(props) {
   const changeFavorite = (data, event) => {
     props.changeChatFavorite(data);
     event.stopPropagation();
@@ -39,25 +41,29 @@ const ChatHeader = (props) => {
         onClick={() => backToDialogList()}
       >
         <img
+          alt='back'
           src={`${CONSTANTS.STATIC_IMAGES_PATH}arrow-left-thick.png`}
-          alt="back"
         />
       </div>
       <div className={styles.infoContainer}>
         <div>
           <img
+            alt='user'
             src={
               avatar === 'anon.png'
                 ? CONSTANTS.ANONYM_IMAGE_PATH
                 : `${CONSTANTS.publicURL}${avatar}`
             }
-            alt="user"
           />
           <span>{firstName}</span>
         </div>
         {chatData && (
           <div>
             <i
+              className={classNames({
+                'far fa-heart': !isFavorite(chatData, userId),
+                'fas fa-heart': isFavorite(chatData, userId),
+              })}
               onClick={(event) =>
                 changeFavorite(
                   {
@@ -67,12 +73,12 @@ const ChatHeader = (props) => {
                   event
                 )
               }
-              className={classNames({
-                'far fa-heart': !isFavorite(chatData, userId),
-                'fas fa-heart': isFavorite(chatData, userId),
-              })}
             />
             <i
+              className={classNames({
+                'fas fa-user-lock': !isBlocked(chatData, userId),
+                'fas fa-unlock': isBlocked(chatData, userId),
+              })}
               onClick={(event) =>
                 changeBlackList(
                   {
@@ -82,17 +88,13 @@ const ChatHeader = (props) => {
                   event
                 )
               }
-              className={classNames({
-                'fas fa-user-lock': !isBlocked(chatData, userId),
-                'fas fa-unlock': isBlocked(chatData, userId),
-              })}
             />
           </div>
         )}
       </div>
     </div>
   );
-};
+}
 
 const mapStateToProps = (state) => {
   const { interlocutor, chatData } = state.chatStore;

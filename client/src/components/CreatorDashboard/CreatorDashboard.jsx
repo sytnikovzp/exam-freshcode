@@ -1,20 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import queryString from 'query-string';
 import classNames from 'classnames';
 import isEqual from 'lodash/isEqual';
+import queryString from 'query-string';
+
+import CONSTANTS from '../../constants';
+
 import {
-  getContests,
   clearContestsList,
+  getContests,
   setNewCreatorFilter,
 } from '../../store/slices/contestsSlice';
 import { getDataForContest } from '../../store/slices/dataForContestSlice';
+
 import withRouter from '../../hocs/withRouter';
-import ContestsContainer from '../ContestsContainer/ContestsContainer';
 import ContestBox from '../ContestBox/ContestBox';
-import styles from './CreatorDashboard.module.sass';
+import ContestsContainer from '../ContestsContainer/ContestsContainer';
 import TryAgain from '../TryAgain/TryAgain';
-import CONSTANTS from '../../constants';
+
+import styles from './CreatorDashboard.module.sass';
 
 const types = [
   '',
@@ -31,25 +35,24 @@ class CreatorDashboard extends React.Component {
   renderSelectType = () => {
     const array = [];
     const { creatorFilter } = this.props;
-    types.forEach(
-      (el, i) =>
-        !i ||
+    for (const [i, el] of types.entries()) {
+      !i ||
         array.push(
           <option key={i - 1} value={el}>
             {el}
           </option>
-        )
-    );
+        );
+    }
     return (
       <select
+        className={styles.input}
+        value={types[creatorFilter.typeIndex]}
         onChange={({ target }) =>
           this.changePredicate({
             name: 'typeIndex',
             value: types.indexOf(target.value),
           })
         }
-        value={types[creatorFilter.typeIndex]}
-        className={styles.input}
       >
         {array}
       </select>
@@ -74,14 +77,14 @@ class CreatorDashboard extends React.Component {
     );
     return (
       <select
+        className={styles.input}
+        value={creatorFilter.industry}
         onChange={({ target }) =>
           this.changePredicate({
             name: 'industry',
             value: target.value,
           })
         }
-        value={creatorFilter.industry}
-        className={styles.input}
       >
         {array}
       </select>
@@ -99,8 +102,9 @@ class CreatorDashboard extends React.Component {
     if (
       this.parseUrlForParams(this.props.location.search) &&
       !this.props.contests.length
-    )
+    ) {
       this.getContests(this.props.creatorFilter);
+    }
   }
 
   getContests = (filter) => {
@@ -124,9 +128,11 @@ class CreatorDashboard extends React.Component {
 
   parseParamsToUrl = (creatorFilter) => {
     const obj = {};
-    Object.keys(creatorFilter).forEach((el) => {
-      if (creatorFilter[el]) obj[el] = creatorFilter[el];
-    });
+    for (const el of Object.keys(creatorFilter)) {
+      if (creatorFilter[el]) {
+        obj[el] = creatorFilter[el];
+      }
+    }
     this.props.navigate(`/Dashboard?${queryString.stringify(obj)}`);
   };
 
@@ -152,11 +158,11 @@ class CreatorDashboard extends React.Component {
   getPredicateOfRequest = () => {
     const obj = {};
     const { creatorFilter } = this.props;
-    Object.keys(creatorFilter).forEach((el) => {
+    for (const el of Object.keys(creatorFilter)) {
       if (creatorFilter[el]) {
         obj[el] = creatorFilter[el];
       }
-    });
+    }
     obj.ownEntries = creatorFilter.ownEntries;
     return obj;
   };
@@ -175,8 +181,8 @@ class CreatorDashboard extends React.Component {
     for (let i = 0; i < contests.length; i++) {
       array.push(
         <ContestBox
-          data={contests[i]}
           key={contests[i].id}
+          data={contests[i]}
           goToExtended={this.goToExtended}
         />
       );
@@ -206,15 +212,15 @@ class CreatorDashboard extends React.Component {
           <span className={styles.headerFilter}>Filter Results</span>
           <div className={styles.inputsContainer}>
             <div
+              className={classNames(styles.myEntries, {
+                [styles.activeMyEntries]: creatorFilter.ownEntries,
+              })}
               onClick={() =>
                 this.changePredicate({
                   name: 'ownEntries',
                   value: !creatorFilter.ownEntries,
                 })
               }
-              className={classNames(styles.myEntries, {
-                [styles.activeMyEntries]: creatorFilter.ownEntries,
-              })}
             >
               My Entries
             </div>
@@ -225,16 +231,16 @@ class CreatorDashboard extends React.Component {
             <div className={styles.inputContainer}>
               <span>By contest ID</span>
               <input
-                type="text"
+                className={styles.input}
+                name='contestId'
+                type='text'
+                value={creatorFilter.contestId}
                 onChange={({ target }) =>
                   this.changePredicate({
                     name: 'contestId',
                     value: target.value,
                   })
                 }
-                name="contestId"
-                value={creatorFilter.contestId}
-                className={styles.input}
               />
             </div>
             {!isFetching && (
@@ -246,17 +252,17 @@ class CreatorDashboard extends React.Component {
             <div className={styles.inputContainer}>
               <span>By amount award</span>
               <select
+                className={styles.input}
+                value={creatorFilter.awardSort}
                 onChange={({ target }) =>
                   this.changePredicate({
                     name: 'awardSort',
                     value: target.value,
                   })
                 }
-                value={creatorFilter.awardSort}
-                className={styles.input}
               >
-                <option value="desc">Descending</option>
-                <option value="asc">Ascending</option>
+                <option value='desc'>Descending</option>
+                <option value='asc'>Ascending</option>
               </select>
             </div>
           </div>
@@ -267,10 +273,10 @@ class CreatorDashboard extends React.Component {
           </div>
         ) : (
           <ContestsContainer
+            haveMore={haveMore}
             isFetching={this.props.isFetching}
             loadMore={this.loadMore}
             navigate={this.props.navigate}
-            haveMore={haveMore}
           >
             {this.setContestList()}
           </ContestsContainer>

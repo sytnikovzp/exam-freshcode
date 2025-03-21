@@ -1,14 +1,17 @@
-import React, { useRef } from 'react';
-import { connect } from 'react-redux';
+import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styles from './ContestCreationPage.module.sass';
+import { connect } from 'react-redux';
+
 import { saveContestToStore } from '../../store/slices/contestCreationSlice';
-import NextButton from '../../components/NextButton/NextButton';
-import ContestForm from '../../components/ContestForm/ContestForm';
+
 import BackButton from '../../components/BackButton/BackButton';
+import ContestForm from '../../components/ContestForm/ContestForm';
+import NextButton from '../../components/NextButton/NextButton';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
 
-const ContestCreationPage = (props) => {
+import styles from './ContestCreationPage.module.sass';
+
+function ContestCreationPage(props) {
   const formRef = useRef();
   const navigate = useNavigate();
 
@@ -31,7 +34,7 @@ const ContestCreationPage = (props) => {
     }
   };
 
-  !props.bundleStore.bundle && navigate('/startContest', {replace: true});
+  !props.bundleStore.bundle && navigate('/startContest', { replace: true });
 
   return (
     <div>
@@ -49,9 +52,9 @@ const ContestCreationPage = (props) => {
         <div className={styles.formContainer}>
           <ContestForm
             contestType={props.contestType}
-            handleSubmit={handleSubmit}
-            formRef={formRef}
             defaultData={contestData}
+            formRef={formRef}
+            handleSubmit={handleSubmit}
           />
         </div>
       </div>
@@ -65,7 +68,7 @@ const ContestCreationPage = (props) => {
       </div>
     </div>
   );
-};
+}
 
 const mapStateToProps = (state) => {
   const { contestCreationStore, bundleStore } = state;

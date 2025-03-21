@@ -1,26 +1,28 @@
-import React from 'react';
 import { connect } from 'react-redux';
-import { Formik, Form } from 'formik';
-import SelectInput from '../../../SelectInput/SelectInput';
+import { Form, Formik } from 'formik';
+
 import { addChatToCatalog } from '../../../../store/slices/chatSlice';
+
+import SelectInput from '../../../SelectInput/SelectInput';
+
 import styles from './AddToCatalog.module.sass';
 
-const AddToCatalog = (props) => {
+function AddToCatalog(props) {
   const getCatalogsNames = () => {
     const { catalogList } = props;
     const namesArray = [];
-    catalogList.forEach((catalog) => {
+    for (const catalog of catalogList) {
       namesArray.push(catalog.catalogName);
-    });
+    }
     return namesArray;
   };
 
   const getValueArray = () => {
     const { catalogList } = props;
     const valueArray = [];
-    catalogList.forEach((catalog) => {
+    for (const catalog of catalogList) {
       valueArray.push(catalog._id);
-    });
+    }
     return valueArray;
   };
 
@@ -33,20 +35,20 @@ const AddToCatalog = (props) => {
   return (
     <>
       {selectArray.length !== 0 ? (
-        <Formik onSubmit={click} initialValues={{ catalogId: '' }}>
+        <Formik initialValues={{ catalogId: '' }} onSubmit={click}>
           <Form className={styles.form}>
             <SelectInput
-              name="catalogId"
-              header="name of catalog"
               classes={{
                 inputContainer: styles.selectInputContainer,
                 inputHeader: styles.selectHeader,
                 selectInput: styles.select,
               }}
+              header='name of catalog'
+              name='catalogId'
               optionsArray={selectArray}
               valueArray={getValueArray()}
             />
-            <button type="submit">Add</button>
+            <button type='submit'>Add</button>
           </Form>
         </Formik>
       ) : (
@@ -56,7 +58,7 @@ const AddToCatalog = (props) => {
       )}
     </>
   );
-};
+}
 
 const mapStateToProps = (state) => state.chatStore;
 

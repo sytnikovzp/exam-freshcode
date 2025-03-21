@@ -1,16 +1,19 @@
-import React from 'react';
 import { connect } from 'react-redux';
-import { Formik, Form } from 'formik';
-import {
-  changeShowModeCatalog,
-  changeRenameCatalogMode,
-  changeCatalogName,
-} from '../../../../store/slices/chatSlice';
-import styles from './CatalogHeader.module.sass';
-import FormInput from '../../../FormInput/FormInput';
+import { Form, Formik } from 'formik';
+
 import Schems from '../../../../utils/validators/validationSchems';
 
-const CatalogListHeader = (props) => {
+import {
+  changeCatalogName,
+  changeRenameCatalogMode,
+  changeShowModeCatalog,
+} from '../../../../store/slices/chatSlice';
+
+import FormInput from '../../../FormInput/FormInput';
+
+import styles from './CatalogHeader.module.sass';
+
+function CatalogListHeader(props) {
   const changeCatalogName = (values) => {
     const { changeCatalogName, _id } = props;
     changeCatalogName({ catalogName: values.catalogName, catalogId: _id });
@@ -24,14 +27,14 @@ const CatalogListHeader = (props) => {
   return (
     <div className={styles.headerContainer}>
       <i
-        className="fas fa-long-arrow-alt-left"
+        className='fas fa-long-arrow-alt-left'
         onClick={() => changeShowModeCatalog()}
       />
       {!isRenameCatalog && (
         <div className={styles.infoContainer}>
           <span>{catalogName}</span>
           <i
-            className="fas fa-edit"
+            className='fas fa-edit'
             onClick={() => changeRenameCatalogMode()}
           />
         </div>
@@ -39,30 +42,30 @@ const CatalogListHeader = (props) => {
       {isRenameCatalog && (
         <div className={styles.changeContainer}>
           <Formik
-            onSubmit={changeCatalogName}
             initialValues={props.initialValues}
             validationSchema={Schems.CatalogSchema}
+            onSubmit={changeCatalogName}
           >
             <Form>
               <FormInput
-                name="catalogName"
                 classes={{
                   container: styles.inputContainer,
                   input: styles.input,
                   warning: styles.fieldWarning,
                   notValid: styles.notValid,
                 }}
-                type="text"
-                label="Catalog Name"
+                label='Catalog Name'
+                name='catalogName'
+                type='text'
               />
-              <button type="submit">Change</button>
+              <button type='submit'>Change</button>
             </Form>
           </Formik>
         </div>
       )}
     </div>
   );
-};
+}
 
 const mapStateToProps = (state) => {
   const { isRenameCatalog } = state.chatStore;

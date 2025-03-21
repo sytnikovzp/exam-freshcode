@@ -1,27 +1,28 @@
-import React from 'react';
-import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
-import { pay, clearPaymentStore } from '../../store/slices/paymentSlice';
-import PayForm from '../../components/PayForm/PayForm';
-import styles from './Payment.module.sass';
-import CONSTANTS from '../../constants';
-import Error from '../../components/Error/Error';
 
-const Payment = (props) => {
+import { clearPaymentStore, pay } from '../../store/slices/paymentSlice';
+
+import Error from '../../components/Error/Error';
+import PayForm from '../../components/PayForm/PayForm';
+
+import styles from './Payment.module.sass';
+
+function Payment(props) {
   const navigate = useNavigate();
 
   const pay = (values) => {
     const { contests } = props.contestCreationStore;
     const contestArray = [];
-    Object.keys(contests).forEach((key) =>
-      contestArray.push({ ...contests[key] })
-    );
+    for (const key of Object.keys(contests)) {
+      contestArray.push({ ...contests[key] });
+    }
     const { number, expiry, cvc } = values;
     const data = new FormData();
     for (let i = 0; i < contestArray.length; i++) {
       data.append('files', contestArray[i].file);
-      contestArray[i].haveFile = !!contestArray[i].file;
+      contestArray[i].haveFile = Boolean(contestArray[i].file);
     }
     data.append('number', number);
     data.append('expiry', expiry);
@@ -52,12 +53,12 @@ const Payment = (props) => {
         <span className={styles.headerLabel}>Checkout</span>
         {error && (
           <Error
+            clearError={clearPaymentStore}
             data={error.data}
             status={error.status}
-            clearError={clearPaymentStore}
           />
         )}
-        <PayForm sendRequest={pay} back={goBack} isPayForOrder />
+        <PayForm isPayForOrder back={goBack} sendRequest={pay} />
       </div>
       <div className={styles.orderInfoContainer}>
         <span className={styles.orderHeader}>Order Summary</span>
@@ -69,11 +70,11 @@ const Payment = (props) => {
           <span>Total:</span>
           <span>$100.00 USD</span>
         </div>
-        <a href="http://www.google.com">Have a promo code?</a>
+        <a href='http://www.google.com'>Have a promo code?</a>
       </div>
     </div>
   );
-};
+}
 
 const mapStateToProps = (state) => ({
   payment: state.payment,

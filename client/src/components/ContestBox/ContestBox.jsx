@@ -1,29 +1,40 @@
-import React from 'react';
 import moment from 'moment';
-import styles from './ContestBox.module.sass';
+
 import CONSTANTS from '../../constants';
 
-const ContestBox = props => {
+import styles from './ContestBox.module.sass';
+
+function ContestBox(props) {
   const getTimeStr = () => {
     const diff = moment.duration(moment().diff(moment(props.data.createdAt)));
     let str = '';
-    if (diff._data.days !== 0) str = `${diff._data.days}d `;
-    if (diff._data.hours !== 0) str += `${diff._data.hours}h`;
-    if (str.length === 0) str = 'less than one hour';
+    if (diff._data.days !== 0) {
+      str = `${diff._data.days}d `;
+    }
+    if (diff._data.hours !== 0) {
+      str += `${diff._data.hours}h`;
+    }
+    if (str.length === 0) {
+      str = 'less than one hour';
+    }
     return str;
   };
 
   const getPreferenceContest = () => {
     const { data } = props;
-    if (data.contestType === CONSTANTS.NAME_CONTEST) return data.typeOfName;
-    if (data.contestType === CONSTANTS.LOGO_CONTEST) return data.brandStyle;
+    if (data.contestType === CONSTANTS.NAME_CONTEST) {
+      return data.typeOfName;
+    }
+    if (data.contestType === CONSTANTS.LOGO_CONTEST) {
+      return data.brandStyle;
+    }
     return data.typeOfTagline;
   };
 
-  const ucFirstLetter = string =>
+  const ucFirstLetter = (string) =>
     string.charAt(0).toUpperCase() + string.slice(1);
 
-  const { id, title, contestType, prize, count, goToExtended } = props.data;
+  const { id, title, contestType, prize, count } = props.data;
   return (
     <div
       className={styles.contestBoxContainer}
@@ -49,16 +60,16 @@ const ContestBox = props => {
           <div className={styles.guaranteedContainer}>
             <div>
               <img
-                src={`${CONSTANTS.STATIC_IMAGES_PATH}smallCheck.png`}
                 alt='check'
+                src={`${CONSTANTS.STATIC_IMAGES_PATH}smallCheck.png`}
               />
             </div>
             <span>Guaranteed prize</span>
           </div>
           <div className={styles.prize}>
             <img
-              src={`${CONSTANTS.STATIC_IMAGES_PATH}diamond.png`}
               alt='diamond'
+              src={`${CONSTANTS.STATIC_IMAGES_PATH}diamond.png`}
             />
             <span>{`$${prize}`}</span>
           </div>
@@ -68,8 +79,8 @@ const ContestBox = props => {
         <div className={styles.entriesContainer}>
           <div className={styles.entriesCounter}>
             <img
-              src={`${CONSTANTS.STATIC_IMAGES_PATH}entrieImage.png`}
               alt='logo'
+              src={`${CONSTANTS.STATIC_IMAGES_PATH}entrieImage.png`}
             />
             <span>{count}</span>
           </div>
@@ -82,6 +93,6 @@ const ContestBox = props => {
       </div>
     </div>
   );
-};
+}
 
 export default ContestBox;

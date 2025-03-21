@@ -1,12 +1,14 @@
-import React, { Component } from 'react';
-import styles from './Footer.module.sass';
+import { Component } from 'react';
+
 import CONSTANTS from '../../constants';
 
+import styles from './Footer.module.sass';
+
 class Footer extends Component {
-  topFooterItemsRender = item => (
+  topFooterItemsRender = (item) => (
     <div key={item.title}>
       <h4>{item.title}</h4>
-      {item.items.map(i => (
+      {item.items.map((i) => (
         <a key={i} href='https://google.com'>
           {i}
         </a>
@@ -14,11 +16,11 @@ class Footer extends Component {
     </div>
   );
 
-  topFooterRender () {
-    return CONSTANTS.FooterItems.map(item => this.topFooterItemsRender(item));
+  topFooterRender() {
+    return CONSTANTS.FooterItems.map((item) => this.topFooterItemsRender(item));
   }
 
-  render () {
+  render() {
     return (
       <div className={styles.footerContainer}>
         <div className={styles.footerTop}>

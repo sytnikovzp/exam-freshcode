@@ -1,7 +1,6 @@
-import React from 'react';
 import styles from './ContestInfo.module.sass';
 
-const TaglineContestSpecialInfo = props => {
+function TaglineContestSpecialInfo(props) {
   const { nameVenture, typeOfTagline } = props;
   return (
     <>
@@ -17,6 +16,6 @@ const TaglineContestSpecialInfo = props => {
       </div>
     </>
   );
-};
+}
 
 export default TaglineContestSpecialInfo;

@@ -1,22 +1,26 @@
-import React from 'react';
 import { connect } from 'react-redux';
-import {
-  updateContest,
-  clearContestUpdationStore,
-} from '../../store/slices/contestUpdationSlice';
+
 import { changeEditContest } from '../../store/slices/contestByIdSlice';
+import {
+  clearContestUpdationStore,
+  updateContest,
+} from '../../store/slices/contestUpdationSlice';
+
 import withRouter from '../../hocs/withRouter';
-import ContestForm from '../ContestForm/ContestForm';
-import styles from './Brief.module.sass';
 import ContestInfo from '../Contest/ContestInfo/ContestInfo';
+import ContestForm from '../ContestForm/ContestForm';
 import Error from '../Error/Error';
 
-const Brief = (props) => {
+import styles from './Brief.module.sass';
+
+function Brief(props) {
   const setNewContestData = (values) => {
     const data = new FormData();
-    Object.keys(values).forEach((key) => {
-      if (key !== 'file' && values[key]) data.append(key, values[key]);
-    });
+    for (const key of Object.keys(values)) {
+      if (key !== 'file' && values[key]) {
+        data.append(key, values[key]);
+      }
+    }
     if (values.file instanceof File) {
       data.append('file', values.file);
     }
@@ -52,7 +56,7 @@ const Brief = (props) => {
       contestType,
     };
     const defaultData = {};
-    Object.keys(data).forEach((key) => {
+    for (const key of Object.keys(data)) {
       if (data[key]) {
         if (key === 'originalFileName') {
           defaultData.file = { name: data[key] };
@@ -60,7 +64,7 @@ const Brief = (props) => {
           defaultData[key] = data[key];
         }
       }
-    });
+    }
     return defaultData;
   };
 
@@ -77,11 +81,11 @@ const Brief = (props) => {
   if (!isEditContest) {
     return (
       <ContestInfo
-        userId={id}
-        contestData={contestData}
         changeEditContest={changeEditContest}
-        role={role}
+        contestData={contestData}
         goChat={goChat}
+        role={role}
+        userId={id}
       />
     );
   }
@@ -89,9 +93,9 @@ const Brief = (props) => {
     <div className={styles.contestForm}>
       {error && (
         <Error
+          clearError={clearContestUpdationStore}
           data={error.data}
           status={error.status}
-          clearError={clearContestUpdationStore}
         />
       )}
       <ContestForm
@@ -101,7 +105,7 @@ const Brief = (props) => {
       />
     </div>
   );
-};
+}
 
 const mapStateToProps = (state) => {
   const { isEditContest } = state.contestByIdStore;

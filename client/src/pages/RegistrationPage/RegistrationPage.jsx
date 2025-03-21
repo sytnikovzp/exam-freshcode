@@ -1,15 +1,16 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import RegistrationForm from '../../components/RegistrationForm/RegistrationForm';
-import styles from './RegistrationPage.module.sass';
+import { useDispatch } from 'react-redux';
+
 import { clearAuthError } from '../../store/slices/authSlice';
 
-const RegistrationPage = props => {
+import RegistrationForm from '../../components/RegistrationForm/RegistrationForm';
+
+import styles from './RegistrationPage.module.sass';
+
+function RegistrationPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   dispatch(clearAuthError());
-
 
   return (
     <div className={styles.signUpPage}>
@@ -18,8 +19,6 @@ const RegistrationPage = props => {
       </div>
     </div>
   );
-};
-
-
+}
 
 export default RegistrationPage;

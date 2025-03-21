@@ -1,7 +1,6 @@
-import React from 'react';
 import styles from './ChatError.module.sass';
 
-const ChatError = props => {
+function ChatError(props) {
   const { getData } = props;
   return (
     <div className={styles.errorContainer} onClick={() => getData()}>
@@ -11,6 +10,6 @@ const ChatError = props => {
       </div>
     </div>
   );
-};
+}
 
 export default ChatError;

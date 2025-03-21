@@ -1,12 +1,11 @@
-import React from 'react';
-import classNames from 'classnames';
 import { useField } from 'formik';
+import classNames from 'classnames';
 
-const ImageUpload = props => {
+function ImageUpload(props) {
   const [field, meta, helpers] = useField(props.name);
   const { uploadContainer, inputContainer, imgStyle } = props.classes;
-  const onChange = e => {
-    const node = window.document.getElementById('imagePreview');
+  const onChange = (e) => {
+    const node = window.document.querySelector('#imagePreview');
     const file = e.target.files[0];
     const imageType = /image.*/;
     if (!file.type.match(imageType)) {
@@ -26,20 +25,20 @@ const ImageUpload = props => {
         <span>Support only images (*.png, *.gif, *.jpeg)</span>
         <input
           {...field}
-          id="fileInput"
-          type="file"
-          accept=".jpg, .png, .jpeg"
+          accept='.jpg, .png, .jpeg'
+          id='fileInput'
+          type='file'
           onClick={onChange}
         />
-        <label htmlFor="fileInput">Chose file</label>
+        <label htmlFor='fileInput'>Chose file</label>
       </div>
       <img
-        id="imagePreview"
-        className={classNames({ [imgStyle]: !!field.value })}
-        alt="user"
+        alt='user'
+        className={classNames({ [imgStyle]: Boolean(field.value) })}
+        id='imagePreview'
       />
     </div>
   );
-};
+}
 
 export default ImageUpload;

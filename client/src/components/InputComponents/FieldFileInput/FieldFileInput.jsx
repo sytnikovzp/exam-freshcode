@@ -1,12 +1,11 @@
-import React from 'react';
 import { Field } from 'formik';
 
-const FieldFileInput = ({ classes, ...rest }) => {
+function FieldFileInput({ classes, ...rest }) {
   const { fileUploadContainer, labelClass, fileNameClass, fileInput } = classes;
 
   return (
     <Field name={rest.name}>
-      {props => {
+      {(props) => {
         const { field } = props;
 
         const getFileName = () => {
@@ -18,10 +17,10 @@ const FieldFileInput = ({ classes, ...rest }) => {
 
         return (
           <div className={fileUploadContainer}>
-            <label htmlFor='fileInput' className={labelClass}>
+            <label className={labelClass} htmlFor='fileInput'>
               Choose file
             </label>
-            <span id='fileNameContainer' className={fileNameClass}>
+            <span className={fileNameClass} id='fileNameContainer'>
               {getFileName()}
             </span>
             <input
@@ -35,6 +34,6 @@ const FieldFileInput = ({ classes, ...rest }) => {
       }}
     </Field>
   );
-};
+}
 
 export default FieldFileInput;

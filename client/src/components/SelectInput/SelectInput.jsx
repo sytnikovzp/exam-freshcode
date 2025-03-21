@@ -1,13 +1,7 @@
-import React, { useLayoutEffect } from 'react';
-import { Field, ErrorMessage } from 'formik';
+import { useLayoutEffect } from 'react';
+import { ErrorMessage, Field } from 'formik';
 
-const SelectInput = ({
-  header,
-  classes,
-  optionsArray,
-  valueArray,
-  ...props
-}) => {
+function SelectInput({ header, classes, optionsArray, valueArray, ...props }) {
   const {
     form: { setFieldValue },
     meta: { initialValue },
@@ -36,7 +30,7 @@ const SelectInput = ({
     if (!initialValue && optionsArray) {
       setFieldValue(field.name, valueArray ? valueArray[0] : optionsArray[0]);
     }
-  }, []);
+  }, [field.name, initialValue, optionsArray, setFieldValue, valueArray]);
 
   return (
     <div className={classes.inputContainer}>
@@ -46,33 +40,35 @@ const SelectInput = ({
       </select>
     </div>
   );
-};
+}
 
-const SelectInputWrapper = ({
+function SelectInputWrapper({
   header,
   classes,
   optionsArray,
   valueArray,
   ...rest
-}) => (
-  <Field {...rest}>
-    {fieldProps => (
-      <>
-        <SelectInput
-          {...fieldProps}
-          header={header}
-          classes={classes}
-          optionsArray={optionsArray}
-          valueArray={valueArray}
-        />
-        <ErrorMessage
-          name={fieldProps.field.name}
-          component='span'
-          className={classes.warning}
-        />
-      </>
-    )}
-  </Field>
-);
+}) {
+  return (
+    <Field {...rest}>
+      {(fieldProps) => (
+        <>
+          <SelectInput
+            {...fieldProps}
+            classes={classes}
+            header={header}
+            optionsArray={optionsArray}
+            valueArray={valueArray}
+          />
+          <ErrorMessage
+            className={classes.warning}
+            component='span'
+            name={fieldProps.field.name}
+          />
+        </>
+      )}
+    </Field>
+  );
+}
 
 export default SelectInputWrapper;

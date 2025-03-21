@@ -1,22 +1,26 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import Rating from 'react-rating';
-import isEqual from 'lodash/isEqual';
-import classNames from 'classnames';
 import { confirmAlert } from 'react-confirm-alert';
-import withRouter from '../../hocs/withRouter';
+import Rating from 'react-rating';
+import { connect } from 'react-redux';
+import classNames from 'classnames';
+import isEqual from 'lodash/isEqual';
+
+import CONSTANTS from '../../constants';
+
 import { goToExpandedDialog } from '../../store/slices/chatSlice';
 import {
   changeMark,
-  clearChangeMarkError,
   changeShowImage,
+  clearChangeMarkError,
 } from '../../store/slices/contestByIdSlice';
-import CONSTANTS from '../../constants';
+
+import withRouter from '../../hocs/withRouter';
+
 import styles from './OfferBox.module.sass';
+
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import './confirmStyle.css';
 
-const OfferBox = (props) => {
+function OfferBox(props) {
   const findConversationInfo = () => {
     const { messagesPreview, id } = props;
     const participants = [id, props.data.User.id];
@@ -115,12 +119,12 @@ const OfferBox = (props) => {
         <div className={styles.userInfo}>
           <div className={styles.creativeInfoContainer}>
             <img
+              alt='user'
               src={
                 avatar === 'anon.png'
                   ? CONSTANTS.ANONYM_IMAGE_PATH
                   : `${CONSTANTS.publicURL}${avatar}`
               }
-              alt="user"
             />
             <div className={styles.nameAndEmail}>
               <span>{`${firstName} ${lastName}`}</span>
@@ -130,89 +134,89 @@ const OfferBox = (props) => {
           <div className={styles.creativeRating}>
             <span className={styles.userScoreLabel}>Creative Rating </span>
             <Rating
-              initialRating={rating}
+              readonly
+              emptySymbol={
+                <img
+                  alt='star-outline'
+                  src={`${CONSTANTS.STATIC_IMAGES_PATH}star-outline.png`}
+                />
+              }
               fractions={2}
               fullSymbol={
                 <img
+                  alt='star'
                   src={`${CONSTANTS.STATIC_IMAGES_PATH}star.png`}
-                  alt="star"
                 />
               }
+              initialRating={rating}
               placeholderSymbol={
                 <img
+                  alt='star'
                   src={`${CONSTANTS.STATIC_IMAGES_PATH}star.png`}
-                  alt="star"
                 />
               }
-              emptySymbol={
-                <img
-                  src={`${CONSTANTS.STATIC_IMAGES_PATH}star-outline.png`}
-                  alt="star-outline"
-                />
-              }
-              readonly
             />
           </div>
         </div>
         <div className={styles.responseConainer}>
           {contestType === CONSTANTS.LOGO_CONTEST ? (
             <img
+              alt='logo'
+              className={styles.responseLogo}
+              src={`${CONSTANTS.publicURL}${data.fileName}`}
               onClick={() =>
                 props.changeShowImage({
                   imagePath: data.fileName,
                   isShowOnFull: true,
                 })
               }
-              className={styles.responseLogo}
-              src={`${CONSTANTS.publicURL}${data.fileName}`}
-              alt="logo"
             />
           ) : (
             <span className={styles.response}>{data.text}</span>
           )}
           {data.User.id !== id && (
             <Rating
+              emptySymbol={
+                <img
+                  alt='star'
+                  src={`${CONSTANTS.STATIC_IMAGES_PATH}star-outline.png`}
+                />
+              }
               fractions={2}
               fullSymbol={
                 <img
+                  alt='star'
                   src={`${CONSTANTS.STATIC_IMAGES_PATH}star.png`}
-                  alt="star"
                 />
               }
+              placeholderRating={data.mark}
               placeholderSymbol={
                 <img
+                  alt='star'
                   src={`${CONSTANTS.STATIC_IMAGES_PATH}star.png`}
-                  alt="star"
-                />
-              }
-              emptySymbol={
-                <img
-                  src={`${CONSTANTS.STATIC_IMAGES_PATH}star-outline.png`}
-                  alt="star"
                 />
               }
               onClick={changeMark}
-              placeholderRating={data.mark}
             />
           )}
         </div>
         {role !== CONSTANTS.CREATOR && (
-          <i onClick={goChat} className="fas fa-comments" />
+          <i className='fas fa-comments' onClick={goChat} />
         )}
       </div>
       {props.needButtons(data.status) && (
         <div className={styles.btnsContainer}>
-          <div onClick={resolveOffer} className={styles.resolveBtn}>
+          <div className={styles.resolveBtn} onClick={resolveOffer}>
             Resolve
           </div>
-          <div onClick={rejectOffer} className={styles.rejectBtn}>
+          <div className={styles.rejectBtn} onClick={rejectOffer}>
             Reject
           </div>
         </div>
       )}
     </div>
   );
-};
+}
 
 const mapDispatchToProps = (dispatch) => ({
   changeMark: (data) => dispatch(changeMark(data)),

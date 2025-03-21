@@ -1,18 +1,22 @@
 import React from 'react';
-import { Form, Formik } from 'formik';
 import { connect } from 'react-redux';
+import { Form, Formik } from 'formik';
+
 import CONSTANTS from '../../constants';
+import Schems from '../../utils/validators/validationSchems';
+
 import { getDataForContest } from '../../store/slices/dataForContestSlice';
-import styles from './ContestForm.module.sass';
+
 import withRouter from '../../hocs/withRouter';
-import Spinner from '../Spinner/Spinner';
 import FormInput from '../FormInput/FormInput';
-import SelectInput from '../SelectInput/SelectInput';
 import FieldFileInput from '../InputComponents/FieldFileInput/FieldFileInput';
 import FormTextArea from '../InputComponents/FormTextArea/FormTextArea';
-import TryAgain from '../TryAgain/TryAgain';
-import Schems from '../../utils/validators/validationSchems';
 import OptionalSelects from '../OptionalSelects/OptionalSelects';
+import SelectInput from '../SelectInput/SelectInput';
+import Spinner from '../Spinner/Spinner';
+import TryAgain from '../TryAgain/TryAgain';
+
+import styles from './ContestForm.module.sass';
 
 const variableOptions = {
   [CONSTANTS.NAME_CONTEST]: {
@@ -70,101 +74,99 @@ class ContestForm extends React.Component {
       return <Spinner />;
     }
     return (
-      <>
-        <div className={styles.formContainer}>
-          <Formik
-            initialValues={{
-              title: '',
-              industry: '',
-              focusOfWork: '',
-              targetCustomer: '',
-              file: '',
-              ...variableOptions[this.props.contestType],
-              ...this.props.initialValues,
-            }}
-            onSubmit={this.props.handleSubmit}
-            validationSchema={Schems.ContestSchem}
-            innerRef={this.props.formRef}
-            enableReinitialize
-          >
-            <Form>
-              <div className={styles.inputContainer}>
-                <span className={styles.inputHeader}>Title of contest</span>
-                <FormInput
-                  name="title"
-                  type="text"
-                  label="Title"
-                  classes={{
-                    container: styles.componentInputContainer,
-                    input: styles.input,
-                    warning: styles.warning,
-                  }}
-                />
-              </div>
-              <div className={styles.inputContainer}>
-                <SelectInput
-                  name="industry"
-                  classes={{
-                    inputContainer: styles.selectInputContainer,
-                    inputHeader: styles.selectHeader,
-                    selectInput: styles.select,
-                    warning: styles.warning,
-                  }}
-                  header="Describe industry associated with your venture"
-                  optionsArray={this.props.dataForContest.data.industry}
-                />
-              </div>
-              <div className={styles.inputContainer}>
-                <span className={styles.inputHeader}>
-                  What does your company / business do?
-                </span>
-                <FormTextArea
-                  name="focusOfWork"
-                  type="text"
-                  label="e.g. We`re an online lifestyle brand that provides stylish and high quality apparel to the expert eco-conscious shopper"
-                  classes={{
-                    container: styles.componentInputContainer,
-                    inputStyle: styles.textArea,
-                    warning: styles.warning,
-                  }}
-                />
-              </div>
-              <div className={styles.inputContainer}>
-                <span className={styles.inputHeader}>
-                  Tell us about your customers
-                </span>
-                <FormTextArea
-                  name="targetCustomer"
-                  type="text"
-                  label="customers"
-                  classes={{
-                    container: styles.componentInputContainer,
-                    inputStyle: styles.textArea,
-                    warning: styles.warning,
-                  }}
-                />
-              </div>
-              <OptionalSelects {...this.props} />
-              <FieldFileInput
-                name="file"
+      <div className={styles.formContainer}>
+        <Formik
+          enableReinitialize
+          initialValues={{
+            title: '',
+            industry: '',
+            focusOfWork: '',
+            targetCustomer: '',
+            file: '',
+            ...variableOptions[this.props.contestType],
+            ...this.props.initialValues,
+          }}
+          innerRef={this.props.formRef}
+          validationSchema={Schems.ContestSchem}
+          onSubmit={this.props.handleSubmit}
+        >
+          <Form>
+            <div className={styles.inputContainer}>
+              <span className={styles.inputHeader}>Title of contest</span>
+              <FormInput
                 classes={{
-                  fileUploadContainer: styles.fileUploadContainer,
-                  labelClass: styles.label,
-                  fileNameClass: styles.fileName,
-                  fileInput: styles.fileInput,
+                  container: styles.componentInputContainer,
+                  input: styles.input,
                   warning: styles.warning,
                 }}
-                type="file"
+                label='Title'
+                name='title'
+                type='text'
               />
-              {this.props.isEditContest ? (
-                <button type="submit" className={styles.changeData}>
-                  Set Data
-                </button>
-              ) : null}
-            </Form>
-          </Formik>
-        </div>
-      </>
+            </div>
+            <div className={styles.inputContainer}>
+              <SelectInput
+                classes={{
+                  inputContainer: styles.selectInputContainer,
+                  inputHeader: styles.selectHeader,
+                  selectInput: styles.select,
+                  warning: styles.warning,
+                }}
+                header='Describe industry associated with your venture'
+                name='industry'
+                optionsArray={this.props.dataForContest.data.industry}
+              />
+            </div>
+            <div className={styles.inputContainer}>
+              <span className={styles.inputHeader}>
+                What does your company / business do?
+              </span>
+              <FormTextArea
+                classes={{
+                  container: styles.componentInputContainer,
+                  inputStyle: styles.textArea,
+                  warning: styles.warning,
+                }}
+                label='e.g. We`re an online lifestyle brand that provides stylish and high quality apparel to the expert eco-conscious shopper'
+                name='focusOfWork'
+                type='text'
+              />
+            </div>
+            <div className={styles.inputContainer}>
+              <span className={styles.inputHeader}>
+                Tell us about your customers
+              </span>
+              <FormTextArea
+                classes={{
+                  container: styles.componentInputContainer,
+                  inputStyle: styles.textArea,
+                  warning: styles.warning,
+                }}
+                label='customers'
+                name='targetCustomer'
+                type='text'
+              />
+            </div>
+            <OptionalSelects {...this.props} />
+            <FieldFileInput
+              classes={{
+                fileUploadContainer: styles.fileUploadContainer,
+                labelClass: styles.label,
+                fileNameClass: styles.fileName,
+                fileInput: styles.fileInput,
+                warning: styles.warning,
+              }}
+              name='file'
+              type='file'
+            />
+            {this.props.isEditContest ? (
+              <button className={styles.changeData} type='submit'>
+                Set Data
+              </button>
+            ) : null}
+          </Form>
+        </Formik>
+      </div>
     );
   }
 }
