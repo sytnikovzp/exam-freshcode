@@ -70,7 +70,7 @@ function Payment(props) {
           <span>Total:</span>
           <span>$100.00 USD</span>
         </div>
-        <a href='http://www.google.com'>Have a promo code?</a>
+        <a href='#'>Have a promo code?</a>
       </div>
     </div>
   );

@@ -1,42 +1,35 @@
+import path from 'path';
+import { fileURLToPath } from 'url';
+
 import react from '@vitejs/plugin-react';
 import browserslistToEsbuild from 'browserslist-to-esbuild';
-import { defineConfig, transformWithEsbuild } from 'vite';
+import { defineConfig, loadEnv } from 'vite';
+import envCompatible from 'vite-plugin-env-compatible';
 
-export default defineConfig({
-  plugins: [
-    {
-      name: 'transform-js-to-jsx',
-      transform(code, id) {
-        if (!id.match(/src\/.*\.js$/)) {
-          return null;
-        }
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
 
-        return transformWithEsbuild(code, id, {
-          loader: 'jsx',
-          jsx: 'automatic',
-        });
-      },
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, path.resolve(dirname, '../'));
+
+  console.log('Loaded from .env variables:', env);
+
+  return {
+    envPrefix: 'SH_',
+    plugins: [react(), envCompatible({ path: '../' })],
+    server: {
+      host: true,
+      open: true,
+      port: parseInt(env.VITE_PORT) || 3000,
+      strictPort: true,
     },
-    react(),
-  ],
-  server: {
-    port: 3000,
-    host: true,
-  },
-  build: {
-    target: browserslistToEsbuild([
-      '>0.2%',
-      'not dead',
-      'not ie <= 11',
-      'not op_mini all',
-    ]),
-  },
-  optimizeDeps: {
-    force: true,
-    esbuildOptions: {
-      loader: {
-        '.js': 'jsx',
-      },
+    build: {
+      target: browserslistToEsbuild([
+        '>0.2%',
+        'not dead',
+        'not ie <= 11',
+        'not op_mini all',
+      ]),
     },
-  },
+  };
 });

@@ -1,5 +1,5 @@
-import ChatSocket from './sockets/ChatSocket';
-import NotificationSocket from './sockets/NotificationSocket';
+import ChatSocket from './sockets/chatSocket';
+import NotificationSocket from './sockets/notificationSocket';
 
 export let controller;
 export let chatController;
