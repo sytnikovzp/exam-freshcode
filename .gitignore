@@ -1,13 +1,14 @@
+node_modules/
+.vs_code/
 .idea/
-.vscode/
+.env
 
-./client/node_modules/
-./server/node_modules/
-./server/uploadFiles
-./server/upload
-./server/public
+client/node_modules/
+client/.vs_code/
+client/dist/
 
-./server/public/images
-.server/public/images
-**server/public/*
-*server/public/*
+server/node_modules/
+server/.vs_code/
+server/.env
+server/sequelize-meta.json
+server/sequelize-data.json
