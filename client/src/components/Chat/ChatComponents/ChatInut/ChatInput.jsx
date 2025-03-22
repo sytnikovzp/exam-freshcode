@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { Form, Formik } from 'formik';
 
-import CONSTANTS from '../../../../constants';
+import { STATIC_PATHS } from '../../../../constants';
 import Schems from '../../../../utils/validators/validationSchems';
 
 import { sendMessage } from '../../../../store/slices/chatSlice';
@@ -39,10 +39,7 @@ function ChatInput(props) {
             type='text'
           />
           <button type='submit'>
-            <img
-              alt='send Message'
-              src={`${CONSTANTS.STATIC_IMAGES_PATH}/send.png`}
-            />
+            <img alt='send Message' src={`${STATIC_PATHS.IMAGES}/send.png`} />
           </button>
         </Form>
       </Formik>

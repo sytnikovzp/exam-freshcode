@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import CONSTANTS from '../../constants';
+import { API_CONFIG, STATIC_PATHS, USER_ROLES } from '../../constants';
 
 import { changeEditModeOnUserProfile } from '../../store/slices/userProfileSlice';
 import { updateUser } from '../../store/slices/userSlice';
@@ -33,8 +33,8 @@ function UserInfo(props) {
             className={styles.avatar}
             src={
               avatar === 'anon.png'
-                ? CONSTANTS.ANONYM_IMAGE_PATH
-                : `${CONSTANTS.publicURL}${avatar}`
+                ? STATIC_PATHS.ANONYM_IMAGE
+                : `${API_CONFIG.PUBLIC_URL}/${avatar}`
             }
           />
           <div className={styles.infoContainer}>
@@ -58,7 +58,7 @@ function UserInfo(props) {
               <span className={styles.label}>Role</span>
               <span className={styles.info}>{role}</span>
             </div>
-            {role === CONSTANTS.CREATOR && (
+            {role === USER_ROLES.CREATOR && (
               <div className={styles.infoBlock}>
                 <span className={styles.label}>Balance</span>
                 <span className={styles.info}>{`${balance}$`}</span>

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { Form, Formik } from 'formik';
 
-import CONTANTS from '../../constants';
+import { CONTEST_TYPES } from '../../constants';
 import Schems from '../../utils/validators/validationSchems';
 
 import {
@@ -17,7 +17,7 @@ import styles from './OfferForm.module.sass';
 
 function OfferForm(props) {
   const renderOfferInput = () => {
-    if (props.contestType === CONTANTS.LOGO_CONTEST) {
+    if (props.contestType === CONTEST_TYPES.LOGO) {
       return (
         <ImageUpload
           classes={{
@@ -58,7 +58,7 @@ function OfferForm(props) {
 
   const { valid, addOfferError, clearOfferError } = props;
   const validationSchema =
-    props.contestType === CONTANTS.LOGO_CONTEST
+    props.contestType === CONTEST_TYPES.LOGO
       ? Schems.LogoOfferSchema
       : Schems.TextOfferSchema;
   return (

@@ -1,14 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import CONSTANTS from '../../constants';
+import { SLICE_NAMES, UI_MODES } from '../../constants';
 import {
   decorateAsyncThunk,
   pendingReducer,
   rejectedReducer,
 } from '../../utils/reduxUtils';
 import * as restController from '../../api/rest/restController';
-
-import { SLICE_NAMES } from '../../constant';
 
 import { clearContestStore } from './contestCreationSlice';
 import { changeProfileViewMode } from './userProfileSlice';
@@ -34,7 +32,7 @@ export const cashOut = decorateAsyncThunk({
   thunk: async (payload, { dispatch }) => {
     const { data } = await restController.cashOut(payload);
     dispatch(updateUser.fulfilled(data));
-    dispatch(changeProfileViewMode(CONSTANTS.USER_INFO_MODE));
+    dispatch(changeProfileViewMode(UI_MODES.USER_INFO));
   },
 });
 

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import moment from 'moment';
 
-import CONSTANTS from '../../../../constants';
+import { CHAT_MODES } from '../../../../constants';
 
 import {
   changeChatBlock,
@@ -58,7 +58,7 @@ function DialogList(props) {
         <DialogBox
           key={index}
           catalogOperation={
-            chatMode === CONSTANTS.CATALOG_PREVIEW_CHAT_MODE
+            chatMode === CHAT_MODES.CATALOG_PREVIEW
               ? removeChat
               : changeShowCatalogCreation
           }
@@ -87,10 +87,10 @@ function DialogList(props) {
 
   const renderChatPreview = () => {
     const { chatMode } = props;
-    if (chatMode === CONSTANTS.FAVORITE_PREVIEW_CHAT_MODE) {
+    if (chatMode === CHAT_MODES.FAVORITE_PREVIEW) {
       return renderPreview(onlyFavoriteDialogs);
     }
-    if (chatMode === CONSTANTS.BLOCKED_PREVIEW_CHAT_MODE) {
+    if (chatMode === CHAT_MODES.BLOCKED_PREVIEW) {
       return renderPreview(onlyBlockDialogs);
     }
     return renderPreview();

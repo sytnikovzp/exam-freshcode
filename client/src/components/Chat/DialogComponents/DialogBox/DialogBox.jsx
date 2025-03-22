@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 
-import CONSTANTS from '../../../../constants';
+import { API_CONFIG, CHAT_MODES, STATIC_PATHS } from '../../../../constants';
 
 import styles from './DialogBox.module.sass';
 
@@ -39,8 +39,8 @@ function DialogBox(props) {
         alt='user'
         src={
           interlocutor.avatar === 'anon.png'
-            ? CONSTANTS.ANONYM_IMAGE_PATH
-            : `${CONSTANTS.publicURL}${interlocutor.avatar}`
+            ? STATIC_PATHS.ANONYM_IMAGE
+            : `${API_CONFIG.PUBLIC_URL}/${interlocutor.avatar}`
         }
       />
       <div className={styles.infoContainer}>
@@ -84,10 +84,8 @@ function DialogBox(props) {
           />
           <i
             className={classNames({
-              'far fa-plus-square':
-                chatMode !== CONSTANTS.CATALOG_PREVIEW_CHAT_MODE,
-              'fas fa-minus-circle':
-                chatMode === CONSTANTS.CATALOG_PREVIEW_CHAT_MODE,
+              'far fa-plus-square': chatMode !== CHAT_MODES.CATALOG_PREVIEW,
+              'fas fa-minus-circle': chatMode === CHAT_MODES.CATALOG_PREVIEW,
             })}
             onClick={(event) => catalogOperation(event, _id)}
           />

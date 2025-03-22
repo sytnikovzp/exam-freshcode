@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import CONSTANTS from '../../constants.js';
+import { STATIC_PATHS } from '../../constants';
 
 function Logo({ to, ...props }) {
   return (
@@ -20,7 +20,7 @@ Logo.propTypes = {
 
 Logo.defaultProps = {
   to: '/',
-  src: `${CONSTANTS.STATIC_IMAGES_PATH}/blue-logo.png`,
+  src: `${STATIC_PATHS.IMAGES}/blue-logo.png`,
   alt: 'logo',
 };
 

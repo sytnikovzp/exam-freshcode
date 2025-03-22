@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import { Form, Formik } from 'formik';
 
-import CONSTANTS from '../../constants';
+import { CONTEST_TYPES } from '../../constants';
 import Schems from '../../utils/validators/validationSchems';
 
 import { getDataForContest } from '../../store/slices/dataForContestSlice';
@@ -19,15 +19,15 @@ import TryAgain from '../TryAgain/TryAgain';
 import styles from './ContestForm.module.sass';
 
 const variableOptions = {
-  [CONSTANTS.NAME_CONTEST]: {
+  [CONTEST_TYPES.NAME]: {
     styleName: '',
     typeOfName: '',
   },
-  [CONSTANTS.LOGO_CONTEST]: {
+  [CONTEST_TYPES.LOGO]: {
     nameVenture: '',
     brandStyle: '',
   },
-  [CONSTANTS.TAGLINE_CONTEST]: {
+  [CONTEST_TYPES.TAGLINE]: {
     nameVenture: '',
     typeOfTagline: '',
   },
@@ -37,18 +37,18 @@ class ContestForm extends Component {
   getPreference = () => {
     const { contestType } = this.props;
     switch (contestType) {
-      case CONSTANTS.NAME_CONTEST: {
+      case CONTEST_TYPES.NAME: {
         this.props.getData({
           characteristic1: 'nameStyle',
           characteristic2: 'typeOfName',
         });
         break;
       }
-      case CONSTANTS.TAGLINE_CONTEST: {
+      case CONTEST_TYPES.TAGLINE: {
         this.props.getData({ characteristic1: 'typeOfTagline' });
         break;
       }
-      case CONSTANTS.LOGO_CONTEST: {
+      case CONTEST_TYPES.LOGO: {
         this.props.getData({ characteristic1: 'brandStyle' });
         break;
       }

@@ -2,12 +2,15 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import CONSTANTS from '../../constants';
+import {
+  SLIDER_IMAGES,
+  SLIDER_TYPES,
+  STATIC_PATHS,
+  UI_ANIMATION,
+} from '../../constants';
 
 import SliderBar from '../../components/SliderBar/SliderBar';
 import SpinnerLoader from '../../components/SpinnerLoader/SpinnerLoader';
-
-import carouselConstants from '../../carouselConstants';
 
 import styles from './HomePage.module.sass';
 
@@ -28,9 +31,7 @@ function HomePage(props) {
 
   const { isFetching } = props;
   const text =
-    CONSTANTS.HEADER_ANIMATION_TEXT[
-      index % CONSTANTS.HEADER_ANIMATION_TEXT.length
-    ];
+    UI_ANIMATION.HEADER_TEXT[index % UI_ANIMATION.HEADER_TEXT.length];
   return (
     <>
       {isFetching ? (
@@ -56,8 +57,8 @@ function HomePage(props) {
           </div>
           <div className={styles.greyContainer}>
             <SliderBar
-              carouselType={carouselConstants.MAIN_SLIDER}
-              images={carouselConstants.mainSliderImages}
+              carouselType={SLIDER_TYPES.MAIN}
+              images={SLIDER_IMAGES.MAIN}
             />
           </div>
           <div className={styles.container__description}>
@@ -66,7 +67,7 @@ function HomePage(props) {
               <div className={styles.card}>
                 <img
                   alt='globe'
-                  src={`${CONSTANTS.STATIC_IMAGES_PATH}/more-benifits-world-icon.png`}
+                  src={`${STATIC_PATHS.IMAGES}/more-benifits-world-icon.png`}
                 />
                 <h3>Largest Naming Community</h3>
                 <p>
@@ -80,7 +81,7 @@ function HomePage(props) {
               <div className={styles.card}>
                 <img
                   alt='desktop'
-                  src={`${CONSTANTS.STATIC_IMAGES_PATH}/more-benifits-high-quality-icon.png`}
+                  src={`${STATIC_PATHS.IMAGES}/more-benifits-high-quality-icon.png`}
                 />
                 <h3>High Quality & Collaboration</h3>
                 <p>
@@ -93,7 +94,7 @@ function HomePage(props) {
               <div className={styles.card}>
                 <img
                   alt='cards'
-                  src={`${CONSTANTS.STATIC_IMAGES_PATH}/more-benifits-trademark-icon.png`}
+                  src={`${STATIC_PATHS.IMAGES}/more-benifits-trademark-icon.png`}
                 />
                 <h3>Agency-Level Features</h3>
                 <p>
@@ -111,31 +112,31 @@ function HomePage(props) {
               <div className={styles.images}>
                 <img
                   alt='forbes'
-                  src={`${CONSTANTS.STATIC_IMAGES_PATH}/sponsors/Forbes-inactive.png`}
+                  src={`${STATIC_PATHS.IMAGES}/sponsors/Forbes-inactive.png`}
                 />
                 <img
                   alt='forbes'
-                  src={`${CONSTANTS.STATIC_IMAGES_PATH}/sponsors/Forbes-active.png`}
+                  src={`${STATIC_PATHS.IMAGES}/sponsors/Forbes-active.png`}
                 />
               </div>
               <div className={styles.images}>
                 <img
                   alt='web'
-                  src={`${CONSTANTS.STATIC_IMAGES_PATH}/sponsors/the_next_web_inactive.png`}
+                  src={`${STATIC_PATHS.IMAGES}/sponsors/the_next_web_inactive.png`}
                 />
                 <img
                   alt='web'
-                  src={`${CONSTANTS.STATIC_IMAGES_PATH}/sponsors/the_next_web_active.png`}
+                  src={`${STATIC_PATHS.IMAGES}/sponsors/the_next_web_active.png`}
                 />
               </div>
               <div className={styles.images}>
                 <img
                   alt='mashable'
-                  src={`${CONSTANTS.STATIC_IMAGES_PATH}/sponsors/mashable-inactive.png`}
+                  src={`${STATIC_PATHS.IMAGES}/sponsors/mashable-inactive.png`}
                 />
                 <img
                   alt='mashable'
-                  src={`${CONSTANTS.STATIC_IMAGES_PATH}/sponsors/mashable-active.png`}
+                  src={`${STATIC_PATHS.IMAGES}/sponsors/mashable-active.png`}
                 />
               </div>
             </div>
@@ -176,7 +177,7 @@ function HomePage(props) {
               </div>
               <img
                 alt='compressed'
-                src={`${CONSTANTS.STATIC_IMAGES_PATH}/gif/1-compressed.gif`}
+                src={`${STATIC_PATHS.IMAGES}/gif/1-compressed.gif`}
               />
             </div>
           </div>
@@ -184,7 +185,7 @@ function HomePage(props) {
             <div className={styles.step}>
               <img
                 alt='compressed'
-                src={`${CONSTANTS.STATIC_IMAGES_PATH}/gif/2-compressed-new.gif`}
+                src={`${STATIC_PATHS.IMAGES}/gif/2-compressed-new.gif`}
               />
               <div className={styles.greenStep}>
                 <h3>Step 2: Ideas start pouring in within minutes</h3>
@@ -225,7 +226,7 @@ function HomePage(props) {
               </div>
               <img
                 alt='compressed'
-                src={`${CONSTANTS.STATIC_IMAGES_PATH}/gif/3-compressed.gif`}
+                src={`${STATIC_PATHS.IMAGES}/gif/3-compressed.gif`}
               />
             </div>
           </div>
@@ -239,8 +240,8 @@ function HomePage(props) {
             </p>
           </div>
           <SliderBar
-            carouselType={carouselConstants.EXAMPLE_SLIDER}
-            images={carouselConstants.exampleSliderImages}
+            carouselType={SLIDER_TYPES.EXAMPLE}
+            images={SLIDER_IMAGES.EXAMPLE}
           />
           <div className={styles.button}>
             <Link className={styles.button__link} to='/dashboard'>
@@ -250,8 +251,8 @@ function HomePage(props) {
           <div className={styles.blueContainer}>
             <h2 className={styles.whiteUnderline}>What our customers say</h2>
             <SliderBar
-              carouselType={carouselConstants.FEEDBACK_SLIDER}
-              images={carouselConstants.feedbackSliderImages}
+              carouselType={SLIDER_TYPES.FEEDBACK}
+              images={SLIDER_IMAGES.FEEDBACK}
             />
           </div>
         </div>

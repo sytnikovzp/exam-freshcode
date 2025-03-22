@@ -1,4 +1,4 @@
-import CONSTANTS from '../../constants';
+import { CONTEST_TYPES } from '../../constants';
 
 import styles from '../ContestForm/ContestForm.module.sass';
 import FormInput from '../FormInput/FormInput';
@@ -10,7 +10,7 @@ function OptionalSelects(props) {
     return <SpinnerLoader />;
   }
   switch (props.contestType) {
-    case CONSTANTS.NAME_CONTEST: {
+    case CONTEST_TYPES.NAME: {
       return (
         <>
           <SelectInput
@@ -38,7 +38,7 @@ function OptionalSelects(props) {
         </>
       );
     }
-    case CONSTANTS.LOGO_CONTEST: {
+    case CONTEST_TYPES.LOGO: {
       return (
         <>
           <div className={styles.inputContainer}>
@@ -70,7 +70,7 @@ function OptionalSelects(props) {
         </>
       );
     }
-    case CONSTANTS.TAGLINE_CONTEST: {
+    case CONTEST_TYPES.TAGLINE: {
       return (
         <>
           <div className={styles.inputContainer}>

@@ -1,0 +1,43 @@
+import { STATIC_PATHS } from './staticPaths';
+
+export const SLIDER_IMAGES = {
+  MAIN: [
+    `${STATIC_PATHS.IMAGES}/main_slider/21..jpg`,
+    `${STATIC_PATHS.IMAGES}/main_slider/B_1_01.jpg`,
+    `${STATIC_PATHS.IMAGES}/main_slider/B_2_15.jpg`,
+    `${STATIC_PATHS.IMAGES}/main_slider/Banner_Visual_Name_AA_48_StyleRevolver.jpg`,
+    `${STATIC_PATHS.IMAGES}/main_slider/Banner_Visual_Name_AD_32_Monvelli.jpg`,
+    `${STATIC_PATHS.IMAGES}/main_slider/Banner_Visual_Name_AG_15_Trusthaven.jpg`,
+    `${STATIC_PATHS.IMAGES}/main_slider/Banner_Visual_Name_AK_03_pawxie.jpg`,
+    `${STATIC_PATHS.IMAGES}/main_slider/Banner_Visual_Name_L_09_lush.jpg`,
+    `${STATIC_PATHS.IMAGES}/main_slider/Banner_Visual_Name_P_42_Avanti.jpg`,
+    `${STATIC_PATHS.IMAGES}/main_slider/Banner_Visual_Name_S_25_Autovity.jpg`,
+    `${STATIC_PATHS.IMAGES}/main_slider/Banner_Visual_Name_W_33_Quantic.jpg`,
+    `${STATIC_PATHS.IMAGES}/main_slider/Banner_Visual_Name_Y_29_Vechetti.jpg`,
+  ],
+  EXAMPLE: [
+    `${STATIC_PATHS.IMAGES}/example_slider/1.jpg`,
+    `${STATIC_PATHS.IMAGES}/example_slider/2.jpg`,
+    `${STATIC_PATHS.IMAGES}/example_slider/3.jpg`,
+    `${STATIC_PATHS.IMAGES}/example_slider/4.jpg`,
+    `${STATIC_PATHS.IMAGES}/example_slider/5.jpg`,
+    `${STATIC_PATHS.IMAGES}/example_slider/6.jpg`,
+    `${STATIC_PATHS.IMAGES}/example_slider/7.jpg`,
+    `${STATIC_PATHS.IMAGES}/example_slider/8.jpg`,
+    `${STATIC_PATHS.IMAGES}/example_slider/9.jpg`,
+    `${STATIC_PATHS.IMAGES}/example_slider/10.jpg`,
+    `${STATIC_PATHS.IMAGES}/example_slider/11.jpg`,
+    `${STATIC_PATHS.IMAGES}/example_slider/12.jpg`,
+  ],
+  FEEDBACK: [
+    `${STATIC_PATHS.IMAGES}/feedback_slider/Blue dress professional Lynne Lowder-avatar.jpg`,
+    `${STATIC_PATHS.IMAGES}/feedback_slider/Bonnie Linked-avatar.jpg`,
+    `${STATIC_PATHS.IMAGES}/feedback_slider/IMG_0232-avatar.jpg`,
+    `${STATIC_PATHS.IMAGES}/feedback_slider/me (5)-avatar.jpeg`,
+    `${STATIC_PATHS.IMAGES}/feedback_slider/MoonFamily web size-avatar.jpg`,
+    `${STATIC_PATHS.IMAGES}/feedback_slider/nathan2-avatar.jpg`,
+    `${STATIC_PATHS.IMAGES}/feedback_slider/Simon-avatar.jpg`,
+    `${STATIC_PATHS.IMAGES}/feedback_slider/squad-avatar.jpg`,
+    `${STATIC_PATHS.IMAGES}/feedback_slider/Unbenannt1-avatar.jpg`,
+  ],
+};

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { SLICE_NAMES } from '../../constant';
+import { SLICE_NAMES } from '../../constants';
 
 const initialState = {
   contests: {},

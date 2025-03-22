@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import isEqual from 'lodash/isEqual';
 import queryString from 'query-string';
 
-import CONSTANTS from '../../constants';
+import { USER_ROLES } from '../../constants';
 
 import {
   clearContestsList,
@@ -293,7 +293,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   getContests: (data) =>
-    dispatch(getContests({ requestData: data, role: CONSTANTS.CREATOR })),
+    dispatch(getContests({ requestData: data, role: USER_ROLES.CREATOR })),
   clearContestsList: () => dispatch(clearContestsList()),
   newFilter: (filter) => dispatch(setNewCreatorFilter(filter)),
   getDataForContest: () => dispatch(getDataForContest()),

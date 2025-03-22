@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 
-import CONSTANTS from '../../constants';
+import { UI_MODES, USER_ROLES } from '../../constants';
 
 import { cashOut, clearPaymentStore } from '../../store/slices/paymentSlice';
 import { changeProfileViewMode } from '../../store/slices/userProfileSlice';
@@ -39,27 +39,25 @@ function UserProfilePage(props) {
           <div className={styles.optionsContainer}>
             <div
               className={classNames(styles.optionContainer, {
-                [styles.currentOption]:
-                  profileViewMode === CONSTANTS.USER_INFO_MODE,
+                [styles.currentOption]: profileViewMode === UI_MODES.USER_INFO,
               })}
-              onClick={() => changeProfileViewMode(CONSTANTS.USER_INFO_MODE)}
+              onClick={() => changeProfileViewMode(UI_MODES.USER_INFO)}
             >
               UserInfo
             </div>
-            {role === CONSTANTS.CREATOR && (
+            {role === USER_ROLES.CREATOR && (
               <div
                 className={classNames(styles.optionContainer, {
-                  [styles.currentOption]:
-                    profileViewMode === CONSTANTS.CASHOUT_MODE,
+                  [styles.currentOption]: profileViewMode === UI_MODES.CASHOUT,
                 })}
-                onClick={() => changeProfileViewMode(CONSTANTS.CASHOUT_MODE)}
+                onClick={() => changeProfileViewMode(UI_MODES.CASHOUT)}
               >
                 Cashout
               </div>
             )}
           </div>
         </div>
-        {profileViewMode === CONSTANTS.USER_INFO_MODE ? (
+        {profileViewMode === UI_MODES.USER_INFO ? (
           <UserInfo />
         ) : (
           <div className={styles.container}>

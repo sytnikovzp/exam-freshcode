@@ -1,16 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import CONSTANTS from '../../constants';
+import { CONTEST_STATUS, SLICE_NAMES, USER_ROLES } from '../../constants';
 import { decorateAsyncThunk, pendingReducer } from '../../utils/reduxUtils';
 import * as restController from '../../api/rest/restController';
-
-import { SLICE_NAMES } from '../../constant';
 
 const initialState = {
   isFetching: true,
   error: null,
   contests: [],
-  customerFilter: CONSTANTS.CONTEST_STATUS_ACTIVE,
+  customerFilter: CONTEST_STATUS.ACTIVE,
   creatorFilter: {
     typeIndex: 1,
     contestId: '',
@@ -25,7 +23,7 @@ export const getContests = decorateAsyncThunk({
   key: `${SLICE_NAMES.CONTESTS}/getContests`,
   thunk: async ({ requestData, role }) => {
     const { data } =
-      role === CONSTANTS.CUSTOMER
+      role === USER_ROLES.CUSTOMER
         ? await restController.getCustomersContests(requestData)
         : await restController.getActiveContests(requestData);
     return data;

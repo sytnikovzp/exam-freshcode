@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import CONSTANTS from '../../constants';
+import { USER_ROLES } from '../../constants';
 
 import { updateBundle } from '../../store/slices/bundleSlice';
 
@@ -13,7 +13,7 @@ import styles from './StartContestPage.module.sass';
 function StartContestPage(props) {
   const navigate = useNavigate();
 
-  if (props.userStore.data.role !== CONSTANTS.CUSTOMER) {
+  if (props.userStore.data.role !== USER_ROLES.CUSTOMER) {
     navigate('/', { replace: true });
   }
 

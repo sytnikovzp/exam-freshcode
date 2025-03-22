@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 
-import CONSTANTS from '../../../../constants';
+import { API_CONFIG, STATIC_PATHS } from '../../../../constants';
 
 import {
   backToDialogList,
@@ -40,10 +40,7 @@ function ChatHeader(props) {
         className={styles.buttonContainer}
         onClick={() => backToDialogList()}
       >
-        <img
-          alt='back'
-          src={`${CONSTANTS.STATIC_IMAGES_PATH}/arrow-left-thick.png`}
-        />
+        <img alt='back' src={`${STATIC_PATHS.IMAGES}/arrow-left-thick.png`} />
       </div>
       <div className={styles.infoContainer}>
         <div>
@@ -51,8 +48,8 @@ function ChatHeader(props) {
             alt='user'
             src={
               avatar === 'anon.png'
-                ? CONSTANTS.ANONYM_IMAGE_PATH
-                : `${CONSTANTS.publicURL}${avatar}`
+                ? STATIC_PATHS.ANONYM_IMAGE
+                : `${API_CONFIG.PUBLIC_URL}/${avatar}`
             }
           />
           <span>{firstName}</span>

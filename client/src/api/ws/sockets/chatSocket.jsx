@@ -1,4 +1,4 @@
-import CONTANTS from '../../../constants';
+import { CHAT_ACTIONS } from '../../../constants';
 
 import {
   addMessage,
@@ -18,7 +18,7 @@ class ChatSocket extends WebSocket {
   };
 
   onChangeBlockStatus = () => {
-    this.socket.on(CONTANTS.CHANGE_BLOCK_STATUS, (data) => {
+    this.socket.on(CHAT_ACTIONS.CHANGE_BLOCK_STATUS, (data) => {
       this.dispatch(changeBlockStatusInStore(data.message));
     });
   };

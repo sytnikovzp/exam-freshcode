@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import CONSTANTS from '../../constants';
+import { API_CONFIG, STATIC_PATHS, USER_ROLES } from '../../constants';
 
 import { clearUserStore, getUser } from '../../store/slices/userSlice';
 
@@ -36,15 +36,12 @@ class Header extends Component {
               alt='user'
               src={
                 this.props.data.avatar === 'anon.png'
-                  ? CONSTANTS.ANONYM_IMAGE_PATH
-                  : `${CONSTANTS.publicURL}${this.props.data.avatar}`
+                  ? STATIC_PATHS.ANONYM_IMAGE
+                  : `${API_CONFIG.PUBLIC_URL}/${this.props.data.avatar}`
               }
             />
             <span>{`Hi, ${this.props.data.displayName}`}</span>
-            <img
-              alt='menu'
-              src={`${CONSTANTS.STATIC_IMAGES_PATH}/menu-down.png`}
-            />
+            <img alt='menu' src={`${STATIC_PATHS.IMAGES}/menu-down.png`} />
             <ul>
               <li>
                 <Link style={{ textDecoration: 'none' }} to='/dashboard'>
@@ -74,7 +71,7 @@ class Header extends Component {
           <img
             alt='email'
             className={styles.emailIcon}
-            src={`${CONSTANTS.STATIC_IMAGES_PATH}/email.png`}
+            src={`${STATIC_PATHS.IMAGES}/email.png`}
           />
         </>
       );
@@ -106,10 +103,7 @@ class Header extends Component {
         </div>
         <div className={styles.loginSignnUpHeaders}>
           <div className={styles.numberContainer}>
-            <img
-              alt='phone'
-              src={`${CONSTANTS.STATIC_IMAGES_PATH}/phone.png`}
-            />
+            <img alt='phone' src={`${STATIC_PATHS.IMAGES}/phone.png`} />
             <span>(877)&nbsp;355-3585</span>
           </div>
           <div className={styles.userButtonsContainer}>
@@ -120,7 +114,7 @@ class Header extends Component {
           <img
             alt='blue_logo'
             className={styles.logo}
-            src={`${CONSTANTS.STATIC_IMAGES_PATH}/blue-logo.png`}
+            src={`${STATIC_PATHS.IMAGES}/blue-logo.png`}
           />
           <div className={styles.leftNav}>
             <div className={styles.nav}>
@@ -129,7 +123,7 @@ class Header extends Component {
                   <span>NAME IDEAS</span>
                   <img
                     alt='menu'
-                    src={`${CONSTANTS.STATIC_IMAGES_PATH}/menu-down.png`}
+                    src={`${STATIC_PATHS.IMAGES}/menu-down.png`}
                   />
                   <ul>
                     <li>
@@ -162,7 +156,7 @@ class Header extends Component {
                   <span>CONTESTS</span>
                   <img
                     alt='menu'
-                    src={`${CONSTANTS.STATIC_IMAGES_PATH}/menu-down.png`}
+                    src={`${STATIC_PATHS.IMAGES}/menu-down.png`}
                   />
                   <ul>
                     <li>
@@ -192,7 +186,7 @@ class Header extends Component {
                   <span>Our Work</span>
                   <img
                     alt='menu'
-                    src={`${CONSTANTS.STATIC_IMAGES_PATH}/menu-down.png`}
+                    src={`${STATIC_PATHS.IMAGES}/menu-down.png`}
                   />
                   <ul>
                     <li>
@@ -213,7 +207,7 @@ class Header extends Component {
                   <span>Names For Sale</span>
                   <img
                     alt='menu'
-                    src={`${CONSTANTS.STATIC_IMAGES_PATH}/menu-down.png`}
+                    src={`${STATIC_PATHS.IMAGES}/menu-down.png`}
                   />
                   <ul>
                     <li>
@@ -240,7 +234,7 @@ class Header extends Component {
                   <span>Blog</span>
                   <img
                     alt='menu'
-                    src={`${CONSTANTS.STATIC_IMAGES_PATH}/menu-down.png`}
+                    src={`${STATIC_PATHS.IMAGES}/menu-down.png`}
                   />
                   <ul>
                     <li>
@@ -259,7 +253,7 @@ class Header extends Component {
                 </li>
               </ul>
             </div>
-            {this.props.data && this.props.data.role !== CONSTANTS.CREATOR && (
+            {this.props.data && this.props.data.role !== USER_ROLES.CREATOR && (
               <div
                 className={styles.startContestBtn}
                 onClick={this.startContests}

@@ -1,4 +1,9 @@
-import CONSTANTS from '../../../constants';
+import {
+  API_CONFIG,
+  CONTEST_STATUS,
+  CONTEST_TYPES,
+  USER_ROLES,
+} from '../../../constants';
 
 import styles from '../../Brief/Brief.module.sass';
 
@@ -31,16 +36,15 @@ function ContestInfo(props) {
             <span className={styles.label}>Contest Type</span>
             <span className={styles.data}>{contestType}</span>
           </div>
-          {User.id === userId &&
-            status !== CONSTANTS.CONTEST_STATUS_FINISHED && (
-              <div
-                className={styles.editBtn}
-                onClick={() => changeEditContest(true)}
-              >
-                Edit
-              </div>
-            )}
-          {role !== CONSTANTS.CUSTOMER && (
+          {User.id === userId && status !== CONTEST_STATUS.FINISHED && (
+            <div
+              className={styles.editBtn}
+              onClick={() => changeEditContest(true)}
+            >
+              Edit
+            </div>
+          )}
+          {role !== USER_ROLES.CUSTOMER && (
             <i className='fas fa-comments' onClick={goChat} />
           )}
         </div>
@@ -48,12 +52,12 @@ function ContestInfo(props) {
           <span className={styles.label}>Title of the Project</span>
           <span className={styles.data}>{title}</span>
         </div>
-        {contestType === CONSTANTS.NAME_CONTEST ? (
+        {contestType === CONTEST_TYPES.NAME ? (
           <NameContestSpecialInfo
             styleName={styleName}
             typeOfName={typeOfName}
           />
-        ) : contestType === CONSTANTS.TAGLINE_CONTEST ? (
+        ) : contestType === CONTEST_TYPES.TAGLINE ? (
           <TaglineContestSpecialInfo
             nameVenture={contestData.nameVenture}
             typeOfTagline={typeOfTagline}
@@ -86,7 +90,7 @@ function ContestInfo(props) {
             <a
               className={styles.file}
               download={originalFileName}
-              href={`${CONSTANTS.publicURL}${fileName}`}
+              href={`${API_CONFIG.PUBLIC_URL}/${fileName}`}
               rel='noreferrer'
               target='_blank'
             >

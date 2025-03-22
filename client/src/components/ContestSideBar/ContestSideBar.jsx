@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import moment from 'moment';
 
-import CONSTANTS from '../../constants';
+import { API_CONFIG, STATIC_PATHS } from '../../constants';
 
 import styles from './ContestSideBar.module.sass';
 
@@ -33,16 +33,13 @@ const ContestSideBar = (props) => {
             <div className={styles.prizeContainer}>
               <img
                 alt='diamond'
-                src={`${CONSTANTS.STATIC_IMAGES_PATH}/big-diamond.png`}
+                src={`${STATIC_PATHS.IMAGES}/big-diamond.png`}
               />
               <span>{`$ ${prize}`}</span>
             </div>
             <div className={styles.timeContainer}>
               <div className={styles.timeDesc}>
-                <img
-                  alt='clock'
-                  src={`${CONSTANTS.STATIC_IMAGES_PATH}/clock.png`}
-                />
+                <img alt='clock' src={`${STATIC_PATHS.IMAGES}/clock.png`} />
                 <span>Going</span>
               </div>
               <span className={styles.time}>{getTimeStr()}</span>
@@ -51,7 +48,7 @@ const ContestSideBar = (props) => {
               <div>
                 <img
                   alt='check'
-                  src={`${CONSTANTS.STATIC_IMAGES_PATH}/smallCheck.png`}
+                  src={`${STATIC_PATHS.IMAGES}/smallCheck.png`}
                 />
               </div>
               <span>Guaranteed prize</span>
@@ -75,8 +72,8 @@ const ContestSideBar = (props) => {
                 alt='user'
                 src={
                   User.avatar === 'anon.png'
-                    ? CONSTANTS.ANONYM_IMAGE_PATH
-                    : `${CONSTANTS.publicURL}${User.avatar}`
+                    ? STATIC_PATHS.ANONYM_IMAGE
+                    : `${API_CONFIG.PUBLIC_URL}/${User.avatar}`
                 }
               />
               <div className={styles.customerNameContainer}>

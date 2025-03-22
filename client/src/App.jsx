@@ -1,7 +1,7 @@
 import { ToastContainer } from 'react-toastify';
 import { Route, Routes } from 'react-router-dom';
 
-import CONSTANTS from './constants';
+import { CONTEST_TYPES } from './constants';
 
 import ChatContainer from './components/Chat/ChatComponents/ChatContainer/ChatContainer';
 import NotFound from './components/NotFound/NotFound';
@@ -54,7 +54,7 @@ function App() {
             <Route
               element={
                 <ContestCreationPage
-                  contestType={CONSTANTS.NAME_CONTEST}
+                  contestType={CONTEST_TYPES.NAME}
                   title='Company Name'
                 />
               }
@@ -63,7 +63,7 @@ function App() {
             <Route
               element={
                 <ContestCreationPage
-                  contestType={CONSTANTS.TAGLINE_CONTEST}
+                  contestType={CONTEST_TYPES.TAGLINE}
                   title='TAGLINE'
                 />
               }
@@ -72,7 +72,7 @@ function App() {
             <Route
               element={
                 <ContestCreationPage
-                  contestType={CONSTANTS.LOGO_CONTEST}
+                  contestType={CONTEST_TYPES.LOGO}
                   title='LOGO'
                 />
               }

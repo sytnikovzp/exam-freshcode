@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import { Form, Formik } from 'formik';
 
-import CONSTANTS from '../../constants';
+import { AUTH_MODES } from '../../constants';
 import Schems from '../../utils/validators/validationSchems';
 
 import { checkAuth, clearAuth } from '../../store/slices/authSlice';
@@ -87,9 +87,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   loginRequest: ({ data, navigate }) =>
-    dispatch(
-      checkAuth({ data, navigate, authMode: CONSTANTS.AUTH_MODE.LOGIN })
-    ),
+    dispatch(checkAuth({ data, navigate, authMode: AUTH_MODES.LOGIN })),
   authClear: () => dispatch(clearAuth()),
 });
 

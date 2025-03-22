@@ -4,7 +4,12 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 import isEqual from 'lodash/isEqual';
 
-import CONSTANTS from '../../constants';
+import {
+  API_CONFIG,
+  CONTEST_STATUS,
+  OFFER_STATUS,
+  USER_ROLES,
+} from '../../constants';
 
 import { goToExpandedDialog } from '../../store/slices/chatSlice';
 import {
@@ -73,8 +78,8 @@ class ContestPage extends Component {
     const contestStatus = this.props.contestByIdStore.contestData.status;
     return (
       contestCreatorId === userId &&
-      contestStatus === CONSTANTS.CONTEST_STATUS_ACTIVE &&
-      offerStatus === CONSTANTS.OFFER_STATUS_PENDING
+      contestStatus === CONTEST_STATUS.ACTIVE &&
+      offerStatus === OFFER_STATUS.PENDING
     );
   };
 
@@ -144,7 +149,7 @@ class ContestPage extends Component {
         {/* <Chat/> */}
         {isShowOnFull && (
           <LightBox
-            mainSrc={`${CONSTANTS.publicURL}${imagePath}`}
+            mainSrc={`${API_CONFIG.PUBLIC_URL}/${imagePath}`}
             onCloseRequest={() =>
               changeShowImage({ isShowOnFull: false, imagePath: null })
             }
@@ -187,8 +192,8 @@ class ContestPage extends Component {
                 />
               ) : (
                 <div className={styles.offersContainer}>
-                  {role === CONSTANTS.CREATOR &&
-                    contestData.status === CONSTANTS.CONTEST_STATUS_ACTIVE && (
+                  {role === USER_ROLES.CREATOR &&
+                    contestData.status === CONTEST_STATUS.ACTIVE && (
                       <OfferForm
                         contestId={contestData.id}
                         contestType={contestData.contestType}

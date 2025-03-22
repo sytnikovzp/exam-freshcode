@@ -1,9 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import { SLICE_NAMES } from '../../constants';
 import { decorateAsyncThunk, rejectedReducer } from '../../utils/reduxUtils';
 import * as restController from '../../api/rest/restController';
-
-import { SLICE_NAMES } from '../../constant';
 
 const initialState = {
   isFetching: true,

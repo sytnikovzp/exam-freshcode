@@ -1,6 +1,6 @@
 import Flickity from 'react-flickity-component';
 
-import carouselConstants from '../../carouselConstants';
+import { SLIDER_TEXTS, SLIDER_TYPES } from '../../constants';
 
 import style from './SliderBar.module.sass';
 
@@ -20,11 +20,11 @@ function SliderBar(props) {
   const getStyleName = () => {
     const { carouselType } = props;
     switch (carouselType) {
-      case carouselConstants.MAIN_SLIDER:
+      case SLIDER_TYPES.MAIN:
         return style.mainCarousel;
-      case carouselConstants.EXAMPLE_SLIDER:
+      case SLIDER_TYPES.EXAMPLE:
         return style.exampleCarousel;
-      case carouselConstants.FEEDBACK_SLIDER:
+      case SLIDER_TYPES.FEEDBACK:
         return style.feedbackCarousel;
     }
   };
@@ -32,7 +32,7 @@ function SliderBar(props) {
   const renderSlides = () => {
     const { carouselType } = props;
     switch (carouselType) {
-      case carouselConstants.MAIN_SLIDER: {
+      case SLIDER_TYPES.MAIN: {
         return Object.keys(props.images).map((key, index) => (
           <img
             key={index}
@@ -42,20 +42,20 @@ function SliderBar(props) {
           />
         ));
       }
-      case carouselConstants.EXAMPLE_SLIDER: {
+      case SLIDER_TYPES.EXAMPLE: {
         return Object.keys(props.images).map((key, index) => (
           <div key={index} className={style['example-cell']}>
             <img alt='slide' src={props.images[key]} />
-            <p>{carouselConstants.EXAMPLE_SLIDER_TEXT[index]}</p>
+            <p>{SLIDER_TEXTS.EXAMPLE[index]}</p>
           </div>
         ));
       }
-      case carouselConstants.FEEDBACK_SLIDER: {
+      case SLIDER_TYPES.FEEDBACK: {
         return Object.keys(props.images).map((key, index) => (
           <div key={index} className={style['feedback-cell']}>
             <img alt='slide' src={props.images[key]} />
-            <p>{carouselConstants.FEEDBACK_SLIDER_TEXT[index].feedback}</p>
-            <span>{carouselConstants.FEEDBACK_SLIDER_TEXT[index].name}</span>
+            <p>{SLIDER_TEXTS.FEEDBACK[index].feedback}</p>
+            <span>{SLIDER_TEXTS.FEEDBACK[index].name}</span>
           </div>
         ));
       }

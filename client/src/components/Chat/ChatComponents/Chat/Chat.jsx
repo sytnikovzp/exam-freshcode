@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 
-import CONSTANTS from '../../../../constants';
+import { CHAT_MODES, STATIC_PATHS } from '../../../../constants';
 import { chatController } from '../../../../api/ws/socketController';
 
 import {
@@ -36,57 +36,52 @@ class Chat extends Component {
     const { setChatPreviewMode } = this.props;
     const { chatMode, isShowChatsInCatalog } = this.props.chatStore;
     const { id } = this.props.userStore.data;
-    const {
-      NORMAL_PREVIEW_CHAT_MODE,
-      FAVORITE_PREVIEW_CHAT_MODE,
-      BLOCKED_PREVIEW_CHAT_MODE,
-      CATALOG_PREVIEW_CHAT_MODE,
-    } = CONSTANTS;
+
     return (
       <div>
         {isShowChatsInCatalog && <CatalogListHeader />}
         {!isShowChatsInCatalog && (
           <div className={styles.chatHeader}>
-            <img alt='logo' src={`${CONSTANTS.STATIC_IMAGES_PATH}/logo.png`} />
+            <img alt='logo' src={`${STATIC_PATHS.IMAGES}/logo.png`} />
           </div>
         )}
         {!isShowChatsInCatalog && (
           <div className={styles.buttonsContainer}>
             <span
               className={classNames(styles.button, {
-                [styles.activeButton]: chatMode === NORMAL_PREVIEW_CHAT_MODE,
+                [styles.activeButton]: chatMode === CHAT_MODES.NORMAL_PREVIEW,
               })}
-              onClick={() => setChatPreviewMode(NORMAL_PREVIEW_CHAT_MODE)}
+              onClick={() => setChatPreviewMode(CHAT_MODES.NORMAL_PREVIEW)}
             >
               Normal
             </span>
             <span
               className={classNames(styles.button, {
-                [styles.activeButton]: chatMode === FAVORITE_PREVIEW_CHAT_MODE,
+                [styles.activeButton]: chatMode === CHAT_MODES.FAVORITE_PREVIEW,
               })}
-              onClick={() => setChatPreviewMode(FAVORITE_PREVIEW_CHAT_MODE)}
+              onClick={() => setChatPreviewMode(CHAT_MODES.FAVORITE_PREVIEW)}
             >
               Favorite
             </span>
             <span
               className={classNames(styles.button, {
-                [styles.activeButton]: chatMode === BLOCKED_PREVIEW_CHAT_MODE,
+                [styles.activeButton]: chatMode === CHAT_MODES.BLOCKED_PREVIEW,
               })}
-              onClick={() => setChatPreviewMode(BLOCKED_PREVIEW_CHAT_MODE)}
+              onClick={() => setChatPreviewMode(CHAT_MODES.BLOCKED_PREVIEW)}
             >
               Blocked
             </span>
             <span
               className={classNames(styles.button, {
-                [styles.activeButton]: chatMode === CATALOG_PREVIEW_CHAT_MODE,
+                [styles.activeButton]: chatMode === CHAT_MODES.CATALOG_PREVIEW,
               })}
-              onClick={() => setChatPreviewMode(CATALOG_PREVIEW_CHAT_MODE)}
+              onClick={() => setChatPreviewMode(CHAT_MODES.CATALOG_PREVIEW)}
             >
               Catalog
             </span>
           </div>
         )}
-        {chatMode === CATALOG_PREVIEW_CHAT_MODE ? (
+        {chatMode === CHAT_MODES.CATALOG_PREVIEW ? (
           <CatalogListContainer />
         ) : (
           <DialogListContainer userId={id} />

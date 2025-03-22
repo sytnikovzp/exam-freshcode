@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, Form, Formik } from 'formik';
 
-import CONSTANTS from '../../constants';
+import { AUTH_MODES, USER_ROLES } from '../../constants';
 import Schems from '../../utils/validators/validationSchems';
 
 import { checkAuth, clearAuth } from '../../store/slices/authSlice';
@@ -64,7 +64,7 @@ class RegistrationForm extends Component {
             email: '',
             password: '',
             confirmPassword: '',
-            role: CONSTANTS.CUSTOMER,
+            role: USER_ROLES.CUSTOMER,
             agreeOfTerms: false,
           }}
           validationSchema={Schems.RegistrationSchem}
@@ -116,21 +116,21 @@ class RegistrationForm extends Component {
             <div className={styles.choseRoleContainer}>
               <Field
                 component={RoleInput}
-                id={CONSTANTS.CUSTOMER}
+                id={USER_ROLES.CUSTOMER}
                 infoRole='I am looking for a Name, Logo or Tagline for my business, brand or product.'
                 name='role'
                 strRole='Join As a Buyer'
                 type='radio'
-                value={CONSTANTS.CUSTOMER}
+                value={USER_ROLES.CUSTOMER}
               />
               <Field
                 component={RoleInput}
-                id={CONSTANTS.CREATOR}
+                id={USER_ROLES.CREATOR}
                 infoRole='I plan to submit name ideas, Logo designs or sell names in Domain Marketplace.'
                 name='role'
                 strRole='Join As a Creative'
                 type='radio'
-                value={CONSTANTS.CREATOR}
+                value={USER_ROLES.CREATOR}
               />
             </div>
             <div className={styles.termsOfService}>
@@ -161,15 +161,13 @@ class RegistrationForm extends Component {
 const mapStateToProps = (state) => ({
   auth: state.auth,
   initialValues: {
-    role: CONSTANTS.CUSTOMER,
+    role: USER_ROLES.CUSTOMER,
   },
 });
 
 const mapDispatchToProps = (dispatch) => ({
   register: ({ data, navigate }) =>
-    dispatch(
-      checkAuth({ data, navigate, authMode: CONSTANTS.AUTH_MODE.REGISTER })
-    ),
+    dispatch(checkAuth({ data, navigate, authMode: AUTH_MODES.REGISTER })),
   authClear: () => dispatch(clearAuth()),
 });
 
