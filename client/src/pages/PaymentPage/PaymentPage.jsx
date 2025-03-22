@@ -7,9 +7,9 @@ import { clearPaymentStore, pay } from '../../store/slices/paymentSlice';
 import Error from '../../components/Error/Error';
 import PayForm from '../../components/PayForm/PayForm';
 
-import styles from './Payment.module.sass';
+import styles from './PaymentPage.module.sass';
 
-function Payment(props) {
+function PaymentPage(props) {
   const navigate = useNavigate();
 
   const pay = (values) => {
@@ -86,4 +86,4 @@ const mapDispatchToProps = (dispatch) => ({
   clearPaymentStore: () => dispatch(clearPaymentStore()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Payment);
+export default connect(mapStateToProps, mapDispatchToProps)(PaymentPage);

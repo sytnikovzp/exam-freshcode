@@ -3,11 +3,11 @@ import CONSTANTS from '../../constants';
 import styles from '../ContestForm/ContestForm.module.sass';
 import FormInput from '../FormInput/FormInput';
 import SelectInput from '../SelectInput/SelectInput';
-import Spinner from '../Spinner/Spinner';
+import SpinnerLoader from '../SpinnerLoader/SpinnerLoader';
 
 function OptionalSelects(props) {
   if (props.isFetching) {
-    return <Spinner />;
+    return <SpinnerLoader />;
   }
   switch (props.contestType) {
     case CONSTANTS.NAME_CONTEST: {

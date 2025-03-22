@@ -138,21 +138,21 @@ function OfferBox(props) {
               emptySymbol={
                 <img
                   alt='star-outline'
-                  src={`${CONSTANTS.STATIC_IMAGES_PATH}star-outline.png`}
+                  src={`${CONSTANTS.STATIC_IMAGES_PATH}/star-outline.png`}
                 />
               }
               fractions={2}
               fullSymbol={
                 <img
                   alt='star'
-                  src={`${CONSTANTS.STATIC_IMAGES_PATH}star.png`}
+                  src={`${CONSTANTS.STATIC_IMAGES_PATH}/star.png`}
                 />
               }
               initialRating={rating}
               placeholderSymbol={
                 <img
                   alt='star'
-                  src={`${CONSTANTS.STATIC_IMAGES_PATH}star.png`}
+                  src={`${CONSTANTS.STATIC_IMAGES_PATH}/star.png`}
                 />
               }
             />
@@ -179,21 +179,21 @@ function OfferBox(props) {
               emptySymbol={
                 <img
                   alt='star'
-                  src={`${CONSTANTS.STATIC_IMAGES_PATH}star-outline.png`}
+                  src={`${CONSTANTS.STATIC_IMAGES_PATH}/star-outline.png`}
                 />
               }
               fractions={2}
               fullSymbol={
                 <img
                   alt='star'
-                  src={`${CONSTANTS.STATIC_IMAGES_PATH}star.png`}
+                  src={`${CONSTANTS.STATIC_IMAGES_PATH}/star.png`}
                 />
               }
               placeholderRating={data.mark}
               placeholderSymbol={
                 <img
                   alt='star'
-                  src={`${CONSTANTS.STATIC_IMAGES_PATH}star.png`}
+                  src={`${CONSTANTS.STATIC_IMAGES_PATH}/star.png`}
                 />
               }
               onClick={changeMark}

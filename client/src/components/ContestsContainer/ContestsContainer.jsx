@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Spinner from '../Spinner/Spinner';
+import SpinnerLoader from '../SpinnerLoader/SpinnerLoader';
 
-import styles from './ContestContainer.module.sass';
+import styles from './ContestsContainer.module.sass';
 
 class ContestsContainer extends React.Component {
   componentDidMount() {
@@ -34,7 +34,7 @@ class ContestsContainer extends React.Component {
         {this.props.children}
         {isFetching && (
           <div className={styles.spinnerContainer}>
-            <Spinner />
+            <SpinnerLoader />
           </div>
         )}
       </div>

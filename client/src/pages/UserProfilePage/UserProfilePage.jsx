@@ -10,9 +10,9 @@ import Error from '../../components/Error/Error';
 import PayForm from '../../components/PayForm/PayForm';
 import UserInfo from '../../components/UserInfo/UserInfo';
 
-import styles from './UserProfile.module.sass';
+import styles from './UserProfilePage.module.sass';
 
-function UserProfile(props) {
+function UserProfilePage(props) {
   const pay = (values) => {
     const { number, expiry, cvc, sum } = values;
     props.cashOut({
@@ -104,4 +104,4 @@ const mapDispatchToProps = (dispatch) => ({
   clearPaymentStore: () => dispatch(clearPaymentStore()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);
+export default connect(mapStateToProps, mapDispatchToProps)(UserProfilePage);

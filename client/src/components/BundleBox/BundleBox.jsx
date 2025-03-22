@@ -3,7 +3,7 @@ import CONSTANTS from '../../constants';
 import styles from './BundleBox.module.sass';
 
 function BundleBox(props) {
-  const defaultPathToImages = `${CONSTANTS.STATIC_IMAGES_PATH}contestLabels/`;
+  const defaultPathToImages = `${CONSTANTS.STATIC_IMAGES_PATH}/contestLabels/`;
 
   const renderImage = () => {
     const array = [];

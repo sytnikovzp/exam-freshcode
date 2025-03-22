@@ -11,7 +11,7 @@ function SelectInput({ header, classes, optionsArray, valueArray, ...props }) {
   const getOptionsArray = () => {
     const array = [];
     for (let i = 0; optionsArray && i < optionsArray.length; i++) {
-      let option;
+      let option = null;
       if (valueArray) {
         option = (
           <option key={i} value={valueArray[i]}>

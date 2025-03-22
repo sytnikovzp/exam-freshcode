@@ -4,20 +4,19 @@ import { connect } from 'react-redux';
 
 import CONSTANTS from '../../constants';
 
-import SlideBar from '../../components/SlideBar/SlideBar';
-import Spinner from '../../components/Spinner/Spinner';
+import SliderBar from '../../components/SliderBar/SliderBar';
+import SpinnerLoader from '../../components/SpinnerLoader/SpinnerLoader';
 
 import carouselConstants from '../../carouselConstants';
 
-import styles from './Home.module.sass';
+import styles from './HomePage.module.sass';
 
-function Home(props) {
+function HomePage(props) {
   const [index, setIndex] = useState(0);
   const [styleName, setStyle] = useState(styles.headline__static);
-  let timeout;
 
   useEffect(() => {
-    timeout = setInterval(() => {
+    const timeout = setInterval(() => {
       setIndex(index + 1);
       setStyle(styles.headline__isloading);
     }, 3000);
@@ -35,7 +34,7 @@ function Home(props) {
   return (
     <>
       {isFetching ? (
-        <Spinner />
+        <SpinnerLoader />
       ) : (
         <div className={styles.container}>
           <div className={styles.headerBar}>
@@ -56,7 +55,7 @@ function Home(props) {
             </div>
           </div>
           <div className={styles.greyContainer}>
-            <SlideBar
+            <SliderBar
               carouselType={carouselConstants.MAIN_SLIDER}
               images={carouselConstants.mainSliderImages}
             />
@@ -67,7 +66,7 @@ function Home(props) {
               <div className={styles.card}>
                 <img
                   alt='globe'
-                  src={`${CONSTANTS.STATIC_IMAGES_PATH}more-benifits-world-icon.png`}
+                  src={`${CONSTANTS.STATIC_IMAGES_PATH}/more-benifits-world-icon.png`}
                 />
                 <h3>Largest Naming Community</h3>
                 <p>
@@ -81,7 +80,7 @@ function Home(props) {
               <div className={styles.card}>
                 <img
                   alt='desktop'
-                  src={`${CONSTANTS.STATIC_IMAGES_PATH}more-benifits-high-quality-icon.png`}
+                  src={`${CONSTANTS.STATIC_IMAGES_PATH}/more-benifits-high-quality-icon.png`}
                 />
                 <h3>High Quality & Collaboration</h3>
                 <p>
@@ -94,7 +93,7 @@ function Home(props) {
               <div className={styles.card}>
                 <img
                   alt='cards'
-                  src={`${CONSTANTS.STATIC_IMAGES_PATH}more-benifits-trademark-icon.png`}
+                  src={`${CONSTANTS.STATIC_IMAGES_PATH}/more-benifits-trademark-icon.png`}
                 />
                 <h3>Agency-Level Features</h3>
                 <p>
@@ -112,31 +111,31 @@ function Home(props) {
               <div className={styles.images}>
                 <img
                   alt='forbes'
-                  src={`${CONSTANTS.STATIC_IMAGES_PATH}sponsors/Forbes-inactive.png`}
+                  src={`${CONSTANTS.STATIC_IMAGES_PATH}/sponsors/Forbes-inactive.png`}
                 />
                 <img
                   alt='forbes'
-                  src={`${CONSTANTS.STATIC_IMAGES_PATH}sponsors/Forbes-active.png`}
+                  src={`${CONSTANTS.STATIC_IMAGES_PATH}/sponsors/Forbes-active.png`}
                 />
               </div>
               <div className={styles.images}>
                 <img
                   alt='web'
-                  src={`${CONSTANTS.STATIC_IMAGES_PATH}sponsors/the_next_web_inactive.png`}
+                  src={`${CONSTANTS.STATIC_IMAGES_PATH}/sponsors/the_next_web_inactive.png`}
                 />
                 <img
                   alt='web'
-                  src={`${CONSTANTS.STATIC_IMAGES_PATH}sponsors/the_next_web_active.png`}
+                  src={`${CONSTANTS.STATIC_IMAGES_PATH}/sponsors/the_next_web_active.png`}
                 />
               </div>
               <div className={styles.images}>
                 <img
                   alt='mashable'
-                  src={`${CONSTANTS.STATIC_IMAGES_PATH}sponsors/mashable-inactive.png`}
+                  src={`${CONSTANTS.STATIC_IMAGES_PATH}/sponsors/mashable-inactive.png`}
                 />
                 <img
                   alt='mashable'
-                  src={`${CONSTANTS.STATIC_IMAGES_PATH}sponsors/mashable-active.png`}
+                  src={`${CONSTANTS.STATIC_IMAGES_PATH}/sponsors/mashable-active.png`}
                 />
               </div>
             </div>
@@ -177,7 +176,7 @@ function Home(props) {
               </div>
               <img
                 alt='compressed'
-                src={`${CONSTANTS.STATIC_IMAGES_PATH}gif/1-compressed.gif`}
+                src={`${CONSTANTS.STATIC_IMAGES_PATH}/gif/1-compressed.gif`}
               />
             </div>
           </div>
@@ -185,7 +184,7 @@ function Home(props) {
             <div className={styles.step}>
               <img
                 alt='compressed'
-                src={`${CONSTANTS.STATIC_IMAGES_PATH}gif/2-compressed-new.gif`}
+                src={`${CONSTANTS.STATIC_IMAGES_PATH}/gif/2-compressed-new.gif`}
               />
               <div className={styles.greenStep}>
                 <h3>Step 2: Ideas start pouring in within minutes</h3>
@@ -226,7 +225,7 @@ function Home(props) {
               </div>
               <img
                 alt='compressed'
-                src={`${CONSTANTS.STATIC_IMAGES_PATH}gif/3-compressed.gif`}
+                src={`${CONSTANTS.STATIC_IMAGES_PATH}/gif/3-compressed.gif`}
               />
             </div>
           </div>
@@ -239,7 +238,7 @@ function Home(props) {
               design
             </p>
           </div>
-          <SlideBar
+          <SliderBar
             carouselType={carouselConstants.EXAMPLE_SLIDER}
             images={carouselConstants.exampleSliderImages}
           />
@@ -250,7 +249,7 @@ function Home(props) {
           </div>
           <div className={styles.blueContainer}>
             <h2 className={styles.whiteUnderline}>What our customers say</h2>
-            <SlideBar
+            <SliderBar
               carouselType={carouselConstants.FEEDBACK_SLIDER}
               images={carouselConstants.feedbackSliderImages}
             />
@@ -266,4 +265,4 @@ const mapStateToProps = (state) => {
   return { isFetching };
 };
 
-export default connect(mapStateToProps, null)(Home);
+export default connect(mapStateToProps, null)(HomePage);

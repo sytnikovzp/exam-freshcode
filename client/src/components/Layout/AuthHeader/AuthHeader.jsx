@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 import CONSTANTS from '../../../constants';
 
-import Logo from '../../Logo';
+import Logo from '../../Logo/Logo';
 
 import styles from './AuthHeader.module.sass';
 
@@ -15,7 +15,7 @@ function AuthHeader() {
     <div className={styles.container}>
       <div className={styles.loginContainer}>
         <div className={styles.headerAuthPage}>
-          <Logo alt='logo' src={`${CONSTANTS.STATIC_IMAGES_PATH}logo.png`} />
+          <Logo alt='logo' src={`${CONSTANTS.STATIC_IMAGES_PATH}/logo.png`} />
           <div className={styles.linkAuthContainer}>
             <Link
               style={{ textDecoration: 'none' }}

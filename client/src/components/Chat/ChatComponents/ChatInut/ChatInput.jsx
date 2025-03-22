@@ -41,7 +41,7 @@ function ChatInput(props) {
           <button type='submit'>
             <img
               alt='send Message'
-              src={`${CONSTANTS.STATIC_IMAGES_PATH}send.png`}
+              src={`${CONSTANTS.STATIC_IMAGES_PATH}/send.png`}
             />
           </button>
         </Form>

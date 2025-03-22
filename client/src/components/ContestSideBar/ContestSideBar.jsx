@@ -33,7 +33,7 @@ const ContestSideBar = (props) => {
             <div className={styles.prizeContainer}>
               <img
                 alt='diamond'
-                src={`${CONSTANTS.STATIC_IMAGES_PATH}big-diamond.png`}
+                src={`${CONSTANTS.STATIC_IMAGES_PATH}/big-diamond.png`}
               />
               <span>{`$ ${prize}`}</span>
             </div>
@@ -41,7 +41,7 @@ const ContestSideBar = (props) => {
               <div className={styles.timeDesc}>
                 <img
                   alt='clock'
-                  src={`${CONSTANTS.STATIC_IMAGES_PATH}clock.png`}
+                  src={`${CONSTANTS.STATIC_IMAGES_PATH}/clock.png`}
                 />
                 <span>Going</span>
               </div>
@@ -51,7 +51,7 @@ const ContestSideBar = (props) => {
               <div>
                 <img
                   alt='check'
-                  src={`${CONSTANTS.STATIC_IMAGES_PATH}smallCheck.png`}
+                  src={`${CONSTANTS.STATIC_IMAGES_PATH}/smallCheck.png`}
                 />
               </div>
               <span>Guaranteed prize</span>

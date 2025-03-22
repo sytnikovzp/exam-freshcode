@@ -13,7 +13,7 @@ import FieldFileInput from '../InputComponents/FieldFileInput/FieldFileInput';
 import FormTextArea from '../InputComponents/FormTextArea/FormTextArea';
 import OptionalSelects from '../OptionalSelects/OptionalSelects';
 import SelectInput from '../SelectInput/SelectInput';
-import Spinner from '../Spinner/Spinner';
+import SpinnerLoader from '../SpinnerLoader/SpinnerLoader';
 import TryAgain from '../TryAgain/TryAgain';
 
 import styles from './ContestForm.module.sass';
@@ -71,7 +71,7 @@ class ContestForm extends React.Component {
       return <TryAgain getData={this.getPreference} />;
     }
     if (isFetching) {
-      return <Spinner />;
+      return <SpinnerLoader />;
     }
     return (
       <div className={styles.formContainer}>

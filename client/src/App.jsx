@@ -8,16 +8,16 @@ import NotFound from './components/NotFound/NotFound';
 import OnlyNotAuthorizedUserRoute from './components/Routes/OnlyNotAuthorizedUserRoute/OnlyNotAuthorizedUserRoute';
 import PrivateRoute from './components/Routes/PrivateRoute/PrivateRoute';
 
-import ContestCreationPage from './pages/ContestCreation/ContestCreationPage';
+import ContestCreationPage from './pages/ContestCreationPage/ContestCreationPage';
 import ContestPage from './pages/ContestPage/ContestPage';
-import Dashboard from './pages/Dashboard/Dashboard';
-import Home from './pages/Home/Home';
+import DashboardPage from './pages/DashboardPage/DashboardPage';
+import HomePage from './pages/HomePage/HomePage';
 import Layout from './pages/Layout/Layout';
 import LoginPage from './pages/LoginPage/LoginPage';
-import Payment from './pages/Payment/Payment';
+import PaymentPage from './pages/PaymentPage/PaymentPage';
 import RegistrationPage from './pages/RegistrationPage/RegistrationPage';
 import StartContestPage from './pages/StartContestPage/StartContestPage';
-import UserProfile from './pages/UserProfile/UserProfile';
+import UserProfilePage from './pages/UserProfilePage/UserProfilePage';
 
 import browserHistory from './browserHistory';
 import Router from './router';
@@ -41,7 +41,7 @@ function App() {
       />
       <Routes>
         <Route element={<Layout />} path='/'>
-          <Route index element={<Home />} />
+          <Route index element={<HomePage />} />
 
           <Route element={<OnlyNotAuthorizedUserRoute />}>
             <Route element={<LoginPage />} path='/login' />
@@ -49,7 +49,7 @@ function App() {
           </Route>
 
           <Route element={<PrivateRoute />}>
-            <Route element={<Payment />} path='/payment' />
+            <Route element={<PaymentPage />} path='/payment' />
             <Route element={<StartContestPage />} path='/startContest' />
             <Route
               element={
@@ -78,9 +78,9 @@ function App() {
               }
               path='/startContest/logoContest'
             />
-            <Route element={<Dashboard />} path='/dashboard' />
+            <Route element={<DashboardPage />} path='/dashboard' />
             <Route element={<ContestPage />} path='/contest/:id' />
-            <Route element={<UserProfile />} path='/account' />
+            <Route element={<UserProfilePage />} path='/account' />
           </Route>
           <Route element={<NotFound />} path='*' />
         </Route>

@@ -47,7 +47,7 @@ class Chat extends React.Component {
         {isShowChatsInCatalog && <CatalogListHeader />}
         {!isShowChatsInCatalog && (
           <div className={styles.chatHeader}>
-            <img alt='logo' src={`${CONSTANTS.STATIC_IMAGES_PATH}logo.png`} />
+            <img alt='logo' src={`${CONSTANTS.STATIC_IMAGES_PATH}/logo.png`} />
           </div>
         )}
         {!isShowChatsInCatalog && (

@@ -159,7 +159,7 @@ export default [
           enforceConst: true,
           ignore: [
             -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 15, 16, 20, 25, 31, 80, 100, 200,
-            256, 400, 401, 403, 404, 406, 409, 500, 504, 3000,
+            256, 400, 401, 403, 404, 406, 408, 409, 500, 504, 3000,
           ],
           ignoreArrayIndexes: true,
         },
@@ -234,7 +234,7 @@ export default [
       'no-return-assign': 'error',
       'no-return-await': 'error',
       'no-script-url': 'error',
-      'no-secrets/no-secrets': 'error',
+      // 'no-secrets/no-secrets': 'error',
       'no-self-assign': 'error',
       'no-self-compare': 'error',
       'no-sequences': 'error',

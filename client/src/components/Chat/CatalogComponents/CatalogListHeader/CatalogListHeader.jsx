@@ -11,7 +11,7 @@ import {
 
 import FormInput from '../../../FormInput/FormInput';
 
-import styles from './CatalogHeader.module.sass';
+import styles from './CatalogListHeader.module.sass';
 
 function CatalogListHeader(props) {
   const changeCatalogName = (values) => {

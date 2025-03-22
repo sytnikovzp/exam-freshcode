@@ -43,7 +43,7 @@ class Header extends React.Component {
             <span>{`Hi, ${this.props.data.displayName}`}</span>
             <img
               alt='menu'
-              src={`${CONSTANTS.STATIC_IMAGES_PATH}menu-down.png`}
+              src={`${CONSTANTS.STATIC_IMAGES_PATH}/menu-down.png`}
             />
             <ul>
               <li>
@@ -74,7 +74,7 @@ class Header extends React.Component {
           <img
             alt='email'
             className={styles.emailIcon}
-            src={`${CONSTANTS.STATIC_IMAGES_PATH}email.png`}
+            src={`${CONSTANTS.STATIC_IMAGES_PATH}/email.png`}
           />
         </>
       );
@@ -106,7 +106,10 @@ class Header extends React.Component {
         </div>
         <div className={styles.loginSignnUpHeaders}>
           <div className={styles.numberContainer}>
-            <img alt='phone' src={`${CONSTANTS.STATIC_IMAGES_PATH}phone.png`} />
+            <img
+              alt='phone'
+              src={`${CONSTANTS.STATIC_IMAGES_PATH}/phone.png`}
+            />
             <span>(877)&nbsp;355-3585</span>
           </div>
           <div className={styles.userButtonsContainer}>
@@ -117,7 +120,7 @@ class Header extends React.Component {
           <img
             alt='blue_logo'
             className={styles.logo}
-            src={`${CONSTANTS.STATIC_IMAGES_PATH}blue-logo.png`}
+            src={`${CONSTANTS.STATIC_IMAGES_PATH}/blue-logo.png`}
           />
           <div className={styles.leftNav}>
             <div className={styles.nav}>
@@ -126,7 +129,7 @@ class Header extends React.Component {
                   <span>NAME IDEAS</span>
                   <img
                     alt='menu'
-                    src={`${CONSTANTS.STATIC_IMAGES_PATH}menu-down.png`}
+                    src={`${CONSTANTS.STATIC_IMAGES_PATH}/menu-down.png`}
                   />
                   <ul>
                     <li>
@@ -159,7 +162,7 @@ class Header extends React.Component {
                   <span>CONTESTS</span>
                   <img
                     alt='menu'
-                    src={`${CONSTANTS.STATIC_IMAGES_PATH}menu-down.png`}
+                    src={`${CONSTANTS.STATIC_IMAGES_PATH}/menu-down.png`}
                   />
                   <ul>
                     <li>
@@ -189,7 +192,7 @@ class Header extends React.Component {
                   <span>Our Work</span>
                   <img
                     alt='menu'
-                    src={`${CONSTANTS.STATIC_IMAGES_PATH}menu-down.png`}
+                    src={`${CONSTANTS.STATIC_IMAGES_PATH}/menu-down.png`}
                   />
                   <ul>
                     <li>
@@ -210,7 +213,7 @@ class Header extends React.Component {
                   <span>Names For Sale</span>
                   <img
                     alt='menu'
-                    src={`${CONSTANTS.STATIC_IMAGES_PATH}menu-down.png`}
+                    src={`${CONSTANTS.STATIC_IMAGES_PATH}/menu-down.png`}
                   />
                   <ul>
                     <li>
@@ -237,7 +240,7 @@ class Header extends React.Component {
                   <span>Blog</span>
                   <img
                     alt='menu'
-                    src={`${CONSTANTS.STATIC_IMAGES_PATH}menu-down.png`}
+                    src={`${CONSTANTS.STATIC_IMAGES_PATH}/menu-down.png`}
                   />
                   <ul>
                     <li>

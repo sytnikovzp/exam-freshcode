@@ -2,8 +2,8 @@ import { Outlet, useLocation } from 'react-router-dom';
 
 import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header';
-import AuthHeader from '../../components/Layout/AuthHeader';
-import RegistrationFooter from '../../components/Layout/RegistrationFooter';
+import AuthHeader from '../../components/Layout/AuthHeader/AuthHeader';
+import RegistrationFooter from '../../components/Layout/RegistrationFooter/RegistrationFooter';
 
 import styles from './Layout.module.sass';
 

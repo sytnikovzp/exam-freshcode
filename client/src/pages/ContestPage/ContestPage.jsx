@@ -21,7 +21,7 @@ import ContestSideBar from '../../components/ContestSideBar/ContestSideBar';
 import Error from '../../components/Error/Error';
 import OfferBox from '../../components/OfferBox/OfferBox';
 import OfferForm from '../../components/OfferForm/OfferForm';
-import Spinner from '../../components/Spinner/Spinner';
+import SpinnerLoader from '../../components/SpinnerLoader/SpinnerLoader';
 import TryAgain from '../../components/TryAgain/TryAgain';
 
 import withRouter from '../../hocs/withRouter';
@@ -156,7 +156,7 @@ class ContestPage extends React.Component {
           </div>
         ) : isFetching ? (
           <div className={styles.containerSpinner}>
-            <Spinner />
+            <SpinnerLoader />
           </div>
         ) : (
           <div className={styles.mainInfoContainer}>

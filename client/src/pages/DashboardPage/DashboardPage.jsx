@@ -6,7 +6,7 @@ import CONSTANTS from '../../constants';
 import CreatorDashboard from '../../components/CreatorDashboard/CreatorDashboard';
 import CustomerDashboard from '../../components/CustomerDashboard/CustomerDashboard';
 
-function Dashboard() {
+function DashboardPage() {
   const navigate = useNavigate();
   const params = useParams();
 
@@ -18,4 +18,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default DashboardPage;

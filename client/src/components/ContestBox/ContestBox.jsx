@@ -61,7 +61,7 @@ function ContestBox(props) {
             <div>
               <img
                 alt='check'
-                src={`${CONSTANTS.STATIC_IMAGES_PATH}smallCheck.png`}
+                src={`${CONSTANTS.STATIC_IMAGES_PATH}/smallCheck.png`}
               />
             </div>
             <span>Guaranteed prize</span>
@@ -69,7 +69,7 @@ function ContestBox(props) {
           <div className={styles.prize}>
             <img
               alt='diamond'
-              src={`${CONSTANTS.STATIC_IMAGES_PATH}diamond.png`}
+              src={`${CONSTANTS.STATIC_IMAGES_PATH}/diamond.png`}
             />
             <span>{`$${prize}`}</span>
           </div>
@@ -80,7 +80,7 @@ function ContestBox(props) {
           <div className={styles.entriesCounter}>
             <img
               alt='logo'
-              src={`${CONSTANTS.STATIC_IMAGES_PATH}entrieImage.png`}
+              src={`${CONSTANTS.STATIC_IMAGES_PATH}/entrieImage.png`}
             />
             <span>{count}</span>
           </div>

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { getUser } from '../../../store/slices/userSlice';
 
-import Spinner from '../../Spinner/Spinner';
+import SpinnerLoader from '../../SpinnerLoader/SpinnerLoader';
 
 function OnlyNotAuthorizedUserRoute() {
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ function OnlyNotAuthorizedUserRoute() {
   }, [dispatch, navigate]);
 
   if (isFetching) {
-    return <Spinner />;
+    return <SpinnerLoader />;
   }
 
   return data ? navigate('/') : <Outlet />;

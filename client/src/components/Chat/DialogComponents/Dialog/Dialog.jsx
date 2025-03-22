@@ -76,7 +76,7 @@ class Dialog extends React.Component {
     const { userId, chatData } = this.props;
     const { blackList, participants } = chatData;
     const userIndex = participants.indexOf(userId);
-    let message;
+    let message = null;
     if (chatData && blackList[userIndex]) {
       message = 'You block him';
     } else if (chatData && blackList.includes(true)) {

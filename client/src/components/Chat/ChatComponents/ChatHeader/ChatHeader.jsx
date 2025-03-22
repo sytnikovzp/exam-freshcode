@@ -42,7 +42,7 @@ function ChatHeader(props) {
       >
         <img
           alt='back'
-          src={`${CONSTANTS.STATIC_IMAGES_PATH}arrow-left-thick.png`}
+          src={`${CONSTANTS.STATIC_IMAGES_PATH}/arrow-left-thick.png`}
         />
       </div>
       <div className={styles.infoContainer}>

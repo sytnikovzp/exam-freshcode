@@ -133,7 +133,7 @@ class CreatorDashboard extends React.Component {
         obj[el] = creatorFilter[el];
       }
     }
-    this.props.navigate(`/Dashboard?${queryString.stringify(obj)}`);
+    this.props.navigate(`/dashboard?${queryString.stringify(obj)}`);
   };
 
   parseUrlForParams = (search) => {

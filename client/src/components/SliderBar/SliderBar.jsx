@@ -2,7 +2,7 @@ import Flickity from 'react-flickity-component';
 
 import carouselConstants from '../../carouselConstants';
 
-import style from './SlideBar.module.sass';
+import style from './SliderBar.module.sass';
 
 import './flickity.css';
 
