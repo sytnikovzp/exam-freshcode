@@ -28,6 +28,33 @@ function ContestInfo(props) {
     User,
     status,
   } = contestData;
+
+  let contestSpecialInfo = null;
+
+  switch (contestType) {
+    case CONTEST_TYPES.NAME:
+      contestSpecialInfo = (
+        <NameContestSpecialInfo styleName={styleName} typeOfName={typeOfName} />
+      );
+      break;
+    case CONTEST_TYPES.TAGLINE:
+      contestSpecialInfo = (
+        <TaglineContestSpecialInfo
+          nameVenture={contestData.nameVenture}
+          typeOfTagline={typeOfTagline}
+        />
+      );
+      break;
+    default:
+      contestSpecialInfo = (
+        <LogoContestSpecialInfo
+          brandStyle={brandStyle}
+          nameVenture={contestData.nameVenture}
+        />
+      );
+      break;
+  }
+
   return (
     <div className={styles.mainContestInfoContainer}>
       <div className={styles.infoContainer}>
@@ -52,22 +79,7 @@ function ContestInfo(props) {
           <span className={styles.label}>Title of the Project</span>
           <span className={styles.data}>{title}</span>
         </div>
-        {contestType === CONTEST_TYPES.NAME ? (
-          <NameContestSpecialInfo
-            styleName={styleName}
-            typeOfName={typeOfName}
-          />
-        ) : contestType === CONTEST_TYPES.TAGLINE ? (
-          <TaglineContestSpecialInfo
-            nameVenture={contestData.nameVenture}
-            typeOfTagline={typeOfTagline}
-          />
-        ) : (
-          <LogoContestSpecialInfo
-            brandStyle={brandStyle}
-            nameVenture={contestData.nameVenture}
-          />
-        )}
+        {contestSpecialInfo}
         <div className={styles.dataContainer}>
           <span className={styles.label}>
             What is your Business/ Brand about?
@@ -76,7 +88,7 @@ function ContestInfo(props) {
         </div>
         <div className={styles.dataContainer}>
           <span className={styles.label}>
-            Description target customers of company{' '}
+            Description target customers of company
           </span>
           <span className={styles.data}>{targetCustomer}</span>
         </div>

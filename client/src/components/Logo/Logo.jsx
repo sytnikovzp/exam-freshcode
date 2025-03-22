@@ -1,27 +1,18 @@
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 import { STATIC_PATHS } from '../../constants';
 
-function Logo({ to, ...props }) {
+function Logo({
+  alt = 'logo',
+  to = '/',
+  src = `${STATIC_PATHS.IMAGES}/blue-logo.png`,
+  className,
+}) {
   return (
     <Link to={to}>
-      <img {...props} />
+      <img alt={alt} className={className} src={src} />
     </Link>
   );
 }
-
-Logo.propTypes = {
-  className: PropTypes.string,
-  to: PropTypes.string,
-  src: PropTypes.string,
-  alt: PropTypes.string,
-};
-
-Logo.defaultProps = {
-  to: '/',
-  src: `${STATIC_PATHS.IMAGES}/blue-logo.png`,
-  alt: 'logo',
-};
 
 export default Logo;

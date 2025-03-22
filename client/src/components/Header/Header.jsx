@@ -1,46 +1,48 @@
-import { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { API_CONFIG, STATIC_PATHS, USER_ROLES } from '../../constants';
 
 import { clearUserStore, getUser } from '../../store/slices/userSlice';
 
-import withRouter from '../../hocs/withRouter';
-
 import styles from './Header.module.sass';
 
-class Header extends Component {
-  componentDidMount() {
-    if (!this.props.data) {
-      this.props.getUser();
+function Header() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { data, isFetching } = useSelector((state) => state.userStore);
+
+  useEffect(() => {
+    if (!data) {
+      dispatch(getUser());
     }
-  }
+  }, [data, dispatch]);
 
-  logOut = () => {
+  const logout = () => {
     localStorage.clear();
-    this.props.clearUserStore();
-    this.props.navigate('/login', { replace: true });
+    dispatch(clearUserStore());
+    navigate('/login', { replace: true });
   };
 
-  startContests = () => {
-    this.props.navigate('/startContest');
+  const startContests = () => {
+    navigate('/startContest');
   };
 
-  renderLoginButtons = () => {
-    if (this.props.data) {
+  const renderLoginButtons = () => {
+    if (data) {
       return (
         <>
           <div className={styles.userInfo}>
             <img
               alt='user'
               src={
-                this.props.data.avatar === 'anon.png'
+                data.avatar === 'anon.png'
                   ? STATIC_PATHS.ANONYM_IMAGE
-                  : `${API_CONFIG.PUBLIC_URL}/${this.props.data.avatar}`
+                  : `${API_CONFIG.PUBLIC_URL}/${data.avatar}`
               }
             />
-            <span>{`Hi, ${this.props.data.displayName}`}</span>
+            <span>{`Hi, ${data.displayName}`}</span>
             <img alt='menu' src={`${STATIC_PATHS.IMAGES}/menu-down.png`} />
             <ul>
               <li>
@@ -64,7 +66,7 @@ class Header extends Component {
                 </Link>
               </li>
               <li>
-                <span onClick={this.logOut}>Logout</span>
+                <span onClick={logout}>Logout</span>
               </li>
             </ul>
           </div>
@@ -88,190 +90,165 @@ class Header extends Component {
     );
   };
 
-  render() {
-    if (this.props.isFetching) {
-      return null;
-    }
-    return (
-      <div className={styles.headerContainer}>
-        <div className={styles.fixedHeader}>
-          <span className={styles.info}>
-            Squadhelp recognized as one of the Most Innovative Companies by Inc
-            Magazine.
-          </span>
-          <a href='#'>Read Announcement</a>
+  if (isFetching) {
+    return null;
+  }
+
+  return (
+    <div className={styles.headerContainer}>
+      <div className={styles.fixedHeader}>
+        <span className={styles.info}>
+          Squadhelp recognized as one of the Most Innovative Companies by Inc
+          Magazine.
+        </span>
+        <a href='#'>Read Announcement</a>
+      </div>
+      <div className={styles.loginSignnUpHeaders}>
+        <div className={styles.numberContainer}>
+          <img alt='phone' src={`${STATIC_PATHS.IMAGES}/phone.png`} />
+          <span>(877)&nbsp;355-3585</span>
         </div>
-        <div className={styles.loginSignnUpHeaders}>
-          <div className={styles.numberContainer}>
-            <img alt='phone' src={`${STATIC_PATHS.IMAGES}/phone.png`} />
-            <span>(877)&nbsp;355-3585</span>
-          </div>
-          <div className={styles.userButtonsContainer}>
-            {this.renderLoginButtons()}
-          </div>
-        </div>
-        <div className={styles.navContainer}>
-          <img
-            alt='blue_logo'
-            className={styles.logo}
-            src={`${STATIC_PATHS.IMAGES}/blue-logo.png`}
-          />
-          <div className={styles.leftNav}>
-            <div className={styles.nav}>
-              <ul>
-                <li>
-                  <span>NAME IDEAS</span>
-                  <img
-                    alt='menu'
-                    src={`${STATIC_PATHS.IMAGES}/menu-down.png`}
-                  />
-                  <ul>
-                    <li>
-                      <a href='#'>Beauty</a>
-                    </li>
-                    <li>
-                      <a href='#'>Consulting</a>
-                    </li>
-                    <li>
-                      <a href='#'>E-Commerce</a>
-                    </li>
-                    <li>
-                      <a href='#'>Fashion & Clothing</a>
-                    </li>
-                    <li>
-                      <a href='#'>Finance</a>
-                    </li>
-                    <li>
-                      <a href='#'>Real Estate</a>
-                    </li>
-                    <li>
-                      <a href='#'>Tech</a>
-                    </li>
-                    <li className={styles.last}>
-                      <a href='#'>More Categories</a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <span>CONTESTS</span>
-                  <img
-                    alt='menu'
-                    src={`${STATIC_PATHS.IMAGES}/menu-down.png`}
-                  />
-                  <ul>
-                    <li>
-                      <a href='#'>HOW IT WORKS</a>
-                    </li>
-                    <li>
-                      <a href='#'>PRICING</a>
-                    </li>
-                    <li>
-                      <a href='#'>AGENCY SERVICE</a>
-                    </li>
-                    <li>
-                      <a href='#'>ACTIVE CONTESTS</a>
-                    </li>
-                    <li>
-                      <a href='#'>WINNERS</a>
-                    </li>
-                    <li>
-                      <a href='#'>LEADERBOARD</a>
-                    </li>
-                    <li className={styles.last}>
-                      <a href='#'>BECOME A CREATIVE</a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <span>Our Work</span>
-                  <img
-                    alt='menu'
-                    src={`${STATIC_PATHS.IMAGES}/menu-down.png`}
-                  />
-                  <ul>
-                    <li>
-                      <a href='#'>NAMES</a>
-                    </li>
-                    <li>
-                      <a href='#'>TAGLINES</a>
-                    </li>
-                    <li>
-                      <a href='#'>LOGOS</a>
-                    </li>
-                    <li className={styles.last}>
-                      <a href='#'>TESTIMONIALS</a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <span>Names For Sale</span>
-                  <img
-                    alt='menu'
-                    src={`${STATIC_PATHS.IMAGES}/menu-down.png`}
-                  />
-                  <ul>
-                    <li>
-                      <a href='#'>POPULAR NAMES</a>
-                    </li>
-                    <li>
-                      <a href='#'>SHORT NAMES</a>
-                    </li>
-                    <li>
-                      <a href='#'>INTRIGUING NAMES</a>
-                    </li>
-                    <li>
-                      <a href='#'>NAMES BY CATEGORY</a>
-                    </li>
-                    <li>
-                      <a href='#'>VISUAL NAME SEARCH</a>
-                    </li>
-                    <li className={styles.last}>
-                      <a href='#'>SELL YOUR DOMAINS</a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <span>Blog</span>
-                  <img
-                    alt='menu'
-                    src={`${STATIC_PATHS.IMAGES}/menu-down.png`}
-                  />
-                  <ul>
-                    <li>
-                      <a href='#'>ULTIMATE NAMING GUIDE</a>
-                    </li>
-                    <li>
-                      <a href='#'>POETIC DEVICES IN BUSINESS NAMING</a>
-                    </li>
-                    <li>
-                      <a href='#'>CROWDED BAR THEORY</a>
-                    </li>
-                    <li className={styles.last}>
-                      <a href='#'>ALL ARTICLES</a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-            {this.props.data && this.props.data.role !== USER_ROLES.CREATOR && (
-              <div
-                className={styles.startContestBtn}
-                onClick={this.startContests}
-              >
-                START CONTEST
-              </div>
-            )}
-          </div>
+        <div className={styles.userButtonsContainer}>
+          {renderLoginButtons()}
         </div>
       </div>
-    );
-  }
+      <div className={styles.navContainer}>
+        <img
+          alt='blue_logo'
+          className={styles.logo}
+          src={`${STATIC_PATHS.IMAGES}/blue-logo.png`}
+        />
+        <div className={styles.leftNav}>
+          <div className={styles.nav}>
+            <ul>
+              <li>
+                <span>NAME IDEAS</span>
+                <img alt='menu' src={`${STATIC_PATHS.IMAGES}/menu-down.png`} />
+                <ul>
+                  <li>
+                    <a href='#'>Beauty</a>
+                  </li>
+                  <li>
+                    <a href='#'>Consulting</a>
+                  </li>
+                  <li>
+                    <a href='#'>E-Commerce</a>
+                  </li>
+                  <li>
+                    <a href='#'>Fashion & Clothing</a>
+                  </li>
+                  <li>
+                    <a href='#'>Finance</a>
+                  </li>
+                  <li>
+                    <a href='#'>Real Estate</a>
+                  </li>
+                  <li>
+                    <a href='#'>Tech</a>
+                  </li>
+                  <li className={styles.last}>
+                    <a href='#'>More Categories</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <span>CONTESTS</span>
+                <img alt='menu' src={`${STATIC_PATHS.IMAGES}/menu-down.png`} />
+                <ul>
+                  <li>
+                    <a href='#'>HOW IT WORKS</a>
+                  </li>
+                  <li>
+                    <a href='#'>PRICING</a>
+                  </li>
+                  <li>
+                    <a href='#'>AGENCY SERVICE</a>
+                  </li>
+                  <li>
+                    <a href='#'>ACTIVE CONTESTS</a>
+                  </li>
+                  <li>
+                    <a href='#'>WINNERS</a>
+                  </li>
+                  <li>
+                    <a href='#'>LEADERBOARD</a>
+                  </li>
+                  <li className={styles.last}>
+                    <a href='#'>BECOME A CREATIVE</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <span>Our Work</span>
+                <img alt='menu' src={`${STATIC_PATHS.IMAGES}/menu-down.png`} />
+                <ul>
+                  <li>
+                    <a href='#'>NAMES</a>
+                  </li>
+                  <li>
+                    <a href='#'>TAGLINES</a>
+                  </li>
+                  <li>
+                    <a href='#'>LOGOS</a>
+                  </li>
+                  <li className={styles.last}>
+                    <a href='#'>TESTIMONIALS</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <span>Names For Sale</span>
+                <img alt='menu' src={`${STATIC_PATHS.IMAGES}/menu-down.png`} />
+                <ul>
+                  <li>
+                    <a href='#'>POPULAR NAMES</a>
+                  </li>
+                  <li>
+                    <a href='#'>SHORT NAMES</a>
+                  </li>
+                  <li>
+                    <a href='#'>INTRIGUING NAMES</a>
+                  </li>
+                  <li>
+                    <a href='#'>NAMES BY CATEGORY</a>
+                  </li>
+                  <li>
+                    <a href='#'>VISUAL NAME SEARCH</a>
+                  </li>
+                  <li className={styles.last}>
+                    <a href='#'>SELL YOUR DOMAINS</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <span>Blog</span>
+                <img alt='menu' src={`${STATIC_PATHS.IMAGES}/menu-down.png`} />
+                <ul>
+                  <li>
+                    <a href='#'>ULTIMATE NAMING GUIDE</a>
+                  </li>
+                  <li>
+                    <a href='#'>POETIC DEVICES IN BUSINESS NAMING</a>
+                  </li>
+                  <li>
+                    <a href='#'>CROWDED BAR THEORY</a>
+                  </li>
+                  <li className={styles.last}>
+                    <a href='#'>ALL ARTICLES</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          {data && data.role !== USER_ROLES.CREATOR && (
+            <div className={styles.startContestBtn} onClick={startContests}>
+              START CONTEST
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 }
 
-const mapStateToProps = (state) => state.userStore;
-const mapDispatchToProps = (dispatch) => ({
-  getUser: () => dispatch(getUser()),
-  clearUserStore: () => dispatch(clearUserStore()),
-});
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));
+export default Header;

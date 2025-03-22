@@ -1,8 +1,6 @@
 import styles from './NextButton.module.sass';
 
-function NextButton(props) {
-  const { submit } = props;
-
+function NextButton({ submit }) {
   return (
     <div className={styles.buttonContainer} onClick={submit}>
       <span>Next</span>

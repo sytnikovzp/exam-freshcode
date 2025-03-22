@@ -1,16 +1,7 @@
 import styles from './ProgressBar.module.sass';
 
-function ProgressBar(props) {
-  const renderProgress = () => {
-    const array = [];
-    for (let i = 1; i <= 3; i++) {
-      array.push(renderBar(i));
-    }
-    return array;
-  };
-
+function ProgressBar({ currentStep }) {
   const renderBar = (count) => {
-    const { currentStep } = props;
     let classOuter = styles.outerNotActive;
     let classInner = styles.innerNotActive;
     let classProgress = '';
@@ -33,6 +24,14 @@ function ProgressBar(props) {
         </div>
       </div>
     );
+  };
+
+  const renderProgress = () => {
+    const array = [];
+    for (let i = 1; i <= 3; i++) {
+      array.push(renderBar(i));
+    }
+    return array;
   };
 
   return <div className={styles.progressBarContainer}>{renderProgress()}</div>;

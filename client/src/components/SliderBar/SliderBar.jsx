@@ -6,7 +6,7 @@ import style from './SliderBar.module.sass';
 
 import './flickity.css';
 
-function SliderBar(props) {
+function SliderBar({ images, carouselType }) {
   const options = {
     draggable: true,
     wrapAround: true,
@@ -18,7 +18,6 @@ function SliderBar(props) {
   };
 
   const getStyleName = () => {
-    const { carouselType } = props;
     switch (carouselType) {
       case SLIDER_TYPES.MAIN:
         return style.mainCarousel;
@@ -26,39 +25,42 @@ function SliderBar(props) {
         return style.exampleCarousel;
       case SLIDER_TYPES.FEEDBACK:
         return style.feedbackCarousel;
+      default:
+        return null;
     }
   };
 
   const renderSlides = () => {
-    const { carouselType } = props;
     switch (carouselType) {
       case SLIDER_TYPES.MAIN: {
-        return Object.keys(props.images).map((key, index) => (
+        return Object.keys(images).map((key, index) => (
           <img
             key={index}
             alt='slide'
             className={style['carousel-cell']}
-            src={props.images[key]}
+            src={images[key]}
           />
         ));
       }
       case SLIDER_TYPES.EXAMPLE: {
-        return Object.keys(props.images).map((key, index) => (
+        return Object.keys(images).map((key, index) => (
           <div key={index} className={style['example-cell']}>
-            <img alt='slide' src={props.images[key]} />
+            <img alt='slide' src={images[key]} />
             <p>{SLIDER_TEXTS.EXAMPLE[index]}</p>
           </div>
         ));
       }
       case SLIDER_TYPES.FEEDBACK: {
-        return Object.keys(props.images).map((key, index) => (
+        return Object.keys(images).map((key, index) => (
           <div key={index} className={style['feedback-cell']}>
-            <img alt='slide' src={props.images[key]} />
+            <img alt='slide' src={images[key]} />
             <p>{SLIDER_TEXTS.FEEDBACK[index].feedback}</p>
             <span>{SLIDER_TEXTS.FEEDBACK[index].name}</span>
           </div>
         ));
       }
+      default:
+        return null;
     }
   };
   return (

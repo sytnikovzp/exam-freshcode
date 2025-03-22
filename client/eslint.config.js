@@ -98,7 +98,6 @@ export default [
       'import/unambiguous': 'error',
       'init-declarations': ['warn', 'always'],
       'jsx-a11y/alt-text': 'warn',
-      'jsx-a11y/anchor-is-valid': 'warn',
       'jsx-a11y/no-noninteractive-element-to-interactive-role': 'error',
       'lines-between-class-members': [
         'error',
@@ -466,6 +465,7 @@ export default [
         { ignorePureComponents: true },
       ],
       'react/destructuring-assignment': ['error', 'always'],
+      // 'jsx-a11y/anchor-is-valid': 'warn',
       // 'import/exports-last': 'warn',
       // 'react/no-array-index-key': 'warn',
       // 'react/jsx-no-bind': ['warn', { allowArrowFunctions: false }],

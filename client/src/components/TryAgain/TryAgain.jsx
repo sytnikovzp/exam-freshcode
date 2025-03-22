@@ -1,7 +1,6 @@
 import styles from './TryAgain.module.sass';
 
-function TryAgain(props) {
-  const { getData } = props;
+function TryAgain({ getData }) {
   return (
     <div className={styles.container}>
       <span onClick={() => getData()}>Server Error. Try again</span>

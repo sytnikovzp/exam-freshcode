@@ -1,7 +1,6 @@
 import styles from './ChatError.module.sass';
 
-function ChatError(props) {
-  const { getData } = props;
+function ChatError({ getData }) {
   return (
     <div className={styles.errorContainer} onClick={() => getData()}>
       <div className={styles.container}>

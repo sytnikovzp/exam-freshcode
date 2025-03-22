@@ -1,6 +1,6 @@
 import styles from './RoleInput.module.sass';
 
-function RoleInput({ id, strRole, infoRole, field, type }) {
+function RoleInput({ id, infoRole, strRole, type, field }) {
   return (
     <label htmlFor={id}>
       <div className={styles.roleContainer}>

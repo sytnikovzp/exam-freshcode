@@ -1,17 +1,19 @@
-import withRouter from '../../hocs/withRouter';
+import { useNavigate } from 'react-router-dom';
 
 import styles from './Notification.module.sass';
 
-function Notification(props) {
+function Notification({ contestId, message }) {
+  const navigate = useNavigate();
+
   return (
     <div>
       <br />
-      <span>{props.message}</span>
+      <span>{message}</span>
       <br />
-      {props.contestId && (
+      {contestId && (
         <span
           className={styles.goToContest}
-          onClick={() => props.navigate(`/contest/${props.contestId}`)}
+          onClick={() => navigate(`/contest/${contestId}`)}
         >
           Go to contest
         </span>
@@ -20,4 +22,4 @@ function Notification(props) {
   );
 }
 
-export default withRouter(Notification);
+export default Notification;

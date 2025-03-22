@@ -1,31 +1,24 @@
 import { Field } from 'formik';
 
-function AgreeTermOfServiceInput({ id, type, classes, label, ...rest }) {
+function AgreeTermOfServiceInput({ classes, id, type, label, ...rest }) {
   return (
     <Field {...rest}>
-      {(props) => {
-        const {
-          meta: { touched, error },
-          field,
-        } = props;
-
-        return (
-          <div>
-            <div className={classes.container}>
-              <input {...field} id={id} placeholder={label} type={type} />
-              <label htmlFor={id}>
-                By clicking this checkbox, you agree to our{' '}
-                <a href='#' rel='noreferrer' target='_blank'>
-                  Terms of Service.
-                </a>
-              </label>
-            </div>
-            {touched && error && (
-              <span className={classes.warning}>{error}</span>
-            )}
+      {({ field, meta }) => (
+        <div>
+          <div className={classes.container}>
+            <input {...field} id={id} placeholder={label} type={type} />
+            <label htmlFor={id}>
+              By clicking this checkbox, you agree to our
+              <a href='#' rel='noreferrer' target='_blank'>
+                Terms of Service.
+              </a>
+            </label>
           </div>
-        );
-      }}
+          {meta.touched && meta.error && (
+            <span className={classes.warning}>{meta.error}</span>
+          )}
+        </div>
+      )}
     </Field>
   );
 }

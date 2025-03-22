@@ -1,8 +1,7 @@
 import styles from './Error.module.sass';
 
-function Error(props) {
+function Error({ clearError, data, status }) {
   const getMessage = () => {
-    const { status, data } = props;
     switch (status) {
       case 404:
         return data;
@@ -19,7 +18,6 @@ function Error(props) {
     }
   };
 
-  const { clearError } = props;
   return (
     <div className={styles.errorContainer}>
       <span>{getMessage()}</span>

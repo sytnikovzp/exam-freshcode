@@ -1,6 +1,6 @@
-const ENV = process.ENV.NODE_ENV || 'development';
+const ENV = import.meta.env.MODE || 'development';
 const SERVER_HOST = 'localhost';
-const SERVER_PORT = 3000;
+const SERVER_PORT = 5000;
 
 export const API_CONFIG = {
   BASE_URL: `http://${SERVER_HOST}:${SERVER_PORT}`,

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import {
   SLIDER_IMAGES,
@@ -14,24 +14,26 @@ import SpinnerLoader from '../../components/SpinnerLoader/SpinnerLoader';
 
 import styles from './HomePage.module.sass';
 
-function HomePage(props) {
+function HomePage() {
   const [index, setIndex] = useState(0);
   const [styleName, setStyle] = useState(styles.headline__static);
+  const isFetching = useSelector((state) => state.userStore.isFetching);
 
   useEffect(() => {
     const timeout = setInterval(() => {
-      setIndex(index + 1);
-      setStyle(styles.headline__isloading);
+      setIndex(
+        (prevIndex) => (prevIndex + 1) % UI_ANIMATION.HEADER_TEXT.length
+      );
     }, 3000);
-    return () => {
-      setStyle(styles.headline__static);
-      clearInterval(timeout);
-    };
-  });
+    return () => clearInterval(timeout);
+  }, []);
 
-  const { isFetching } = props;
-  const text =
-    UI_ANIMATION.HEADER_TEXT[index % UI_ANIMATION.HEADER_TEXT.length];
+  useEffect(() => {
+    setStyle(styles.headline__isloading);
+    const resetStyle = setTimeout(() => setStyle(styles.headline__static), 500);
+    return () => clearTimeout(resetStyle);
+  }, [index]);
+
   return (
     <>
       {isFetching ? (
@@ -41,7 +43,9 @@ function HomePage(props) {
           <div className={styles.headerBar}>
             <div className={styles.headline}>
               <span>Find the Perfect Name for</span>
-              <span className={styleName}>{text}</span>
+              <span className={styleName}>
+                {UI_ANIMATION.HEADER_TEXT[index]}
+              </span>
             </div>
             <p>
               Launch a naming contest to engage hundreds of naming experts as
@@ -261,9 +265,4 @@ function HomePage(props) {
   );
 }
 
-const mapStateToProps = (state) => {
-  const { isFetching } = state.userStore;
-  return { isFetching };
-};
-
-export default connect(mapStateToProps, null)(HomePage);
+export default HomePage;

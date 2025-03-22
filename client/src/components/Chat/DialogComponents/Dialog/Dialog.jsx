@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { Component, createRef } from 'react';
 import { connect } from 'react-redux';
 import className from 'classnames';
 import moment from 'moment';
@@ -19,7 +19,7 @@ class Dialog extends Component {
     this.scrollToBottom();
   }
 
-  messagesEnd = React.createRef();
+  messagesEnd = createRef();
 
   scrollToBottom = () => {
     this.messagesEnd.current.scrollIntoView({ behavior: 'smooth' });
