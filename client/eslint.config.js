@@ -78,7 +78,6 @@ export default [
       'getter-return': 'error',
       'global-require': 'off',
       'guard-for-in': 'warn',
-      'import/exports-last': 'warn',
       'import/extensions': [
         'warn',
         'never',
@@ -467,6 +466,7 @@ export default [
         { ignorePureComponents: true },
       ],
       'react/destructuring-assignment': ['error', 'always'],
+      // 'import/exports-last': 'warn',
       // 'react/no-array-index-key': 'warn',
       // 'react/jsx-no-bind': ['warn', { allowArrowFunctions: false }],
     },

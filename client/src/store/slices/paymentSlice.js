@@ -5,14 +5,14 @@ import {
   decorateAsyncThunk,
   pendingReducer,
   rejectedReducer,
-} from '../../utils/store';
+} from '../../utils/reduxUtils';
 import * as restController from '../../api/rest/restController';
+
+import { SLICE_NAMES } from '../../constant';
 
 import { clearContestStore } from './contestCreationSlice';
 import { changeProfileViewMode } from './userProfileSlice';
 import { updateUser } from './userSlice';
-
-const PAYMENT_SLICE_NAME = 'payment';
 
 const initialState = {
   isFetching: false,
@@ -21,7 +21,7 @@ const initialState = {
 };
 
 export const pay = decorateAsyncThunk({
-  key: `${PAYMENT_SLICE_NAME}/pay`,
+  key: `${SLICE_NAMES.PAYMENT}/pay`,
   thunk: async ({ data, navigate }, { dispatch }) => {
     await restController.payMent(data);
     navigate('/dashboard', { replace: true });
@@ -30,7 +30,7 @@ export const pay = decorateAsyncThunk({
 });
 
 export const cashOut = decorateAsyncThunk({
-  key: `${PAYMENT_SLICE_NAME}/cashOut`,
+  key: `${SLICE_NAMES.PAYMENT}/cashOut`,
   thunk: async (payload, { dispatch }) => {
     const { data } = await restController.cashOut(payload);
     dispatch(updateUser.fulfilled(data));
@@ -56,7 +56,7 @@ const extraReducers = (builder) => {
 };
 
 const paymentSlice = createSlice({
-  name: PAYMENT_SLICE_NAME,
+  name: SLICE_NAMES.PAYMENT,
   initialState,
   reducers,
   extraReducers,

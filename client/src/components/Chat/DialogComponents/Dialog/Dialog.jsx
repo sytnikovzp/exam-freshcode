@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
 import className from 'classnames';
 import moment from 'moment';
@@ -13,7 +13,7 @@ import ChatInput from '../../ChatComponents/ChatInut/ChatInput';
 
 import styles from './Dialog.module.sass';
 
-class Dialog extends React.Component {
+class Dialog extends Component {
   componentDidMount() {
     this.props.getDialog({ interlocutorId: this.props.interlocutor.id });
     this.scrollToBottom();

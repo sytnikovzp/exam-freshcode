@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import isEqual from 'lodash/isEqual';
@@ -31,7 +31,7 @@ const types = [
   'name,logo',
 ];
 
-class CreatorDashboard extends React.Component {
+class CreatorDashboard extends Component {
   renderSelectType = () => {
     const array = [];
     const { creatorFilter } = this.props;

@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
 import { Form, Formik } from 'formik';
 
@@ -33,7 +33,7 @@ const variableOptions = {
   },
 };
 
-class ContestForm extends React.Component {
+class ContestForm extends Component {
   getPreference = () => {
     const { contestType } = this.props;
     switch (contestType) {

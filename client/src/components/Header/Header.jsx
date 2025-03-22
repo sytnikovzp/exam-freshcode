@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -10,7 +10,7 @@ import withRouter from '../../hocs/withRouter';
 
 import styles from './Header.module.sass';
 
-class Header extends React.Component {
+class Header extends Component {
   componentDidMount() {
     if (!this.props.data) {
       this.props.getUser();

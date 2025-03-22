@@ -6,10 +6,10 @@ import {
   fulfilledReducer,
   pendingReducer,
   rejectedReducer,
-} from '../../utils/store';
+} from '../../utils/reduxUtils';
 import * as restController from '../../api/rest/restController';
 
-const AUTH_SLICE_NAME = 'auth';
+import { SLICE_NAMES } from '../../constant';
 
 const initialState = {
   isFetching: false,
@@ -17,7 +17,7 @@ const initialState = {
 };
 
 export const checkAuth = decorateAsyncThunk({
-  key: `${AUTH_SLICE_NAME}/checkAuth`,
+  key: `${SLICE_NAMES.AUTH}/checkAuth`,
   thunk: async ({ data: authInfo, navigate, authMode }) => {
     authMode === CONSTANTS.AUTH_MODE.LOGIN
       ? await restController.loginRequest(authInfo)
@@ -40,7 +40,7 @@ const extraReducers = (builder) => {
 };
 
 const authSlice = createSlice({
-  name: `${AUTH_SLICE_NAME}`,
+  name: `${SLICE_NAMES.AUTH}`,
   initialState,
   reducers,
   extraReducers,

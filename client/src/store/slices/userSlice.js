@@ -1,12 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import { rejectedReducer } from '../../utils/store';
+import { rejectedReducer } from '../../utils/reduxUtils';
 import * as restController from '../../api/rest/restController';
 import { controller } from '../../api/ws/socketController';
 
-import { changeEditModeOnUserProfile } from './userProfileSlice';
+import { SLICE_NAMES } from '../../constant';
 
-const USER_SLICE_NAME = 'user';
+import { changeEditModeOnUserProfile } from './userProfileSlice';
 
 const initialState = {
   isFetching: true,
@@ -15,7 +15,7 @@ const initialState = {
 };
 
 export const getUser = createAsyncThunk(
-  `${USER_SLICE_NAME}/getUser`,
+  `${SLICE_NAMES.USER}/getUser`,
   async (navigate, { rejectWithValue }) => {
     try {
       const { data } = await restController.getUser();
@@ -34,7 +34,7 @@ export const getUser = createAsyncThunk(
 );
 
 export const updateUser = createAsyncThunk(
-  `${USER_SLICE_NAME}/updateUser`,
+  `${SLICE_NAMES.USER}/updateUser`,
   async (payload, { rejectWithValue, dispatch }) => {
     try {
       const { data } = await restController.updateUser(payload);
@@ -81,7 +81,7 @@ const extraReducers = (builder) => {
 };
 
 const userSlice = createSlice({
-  name: USER_SLICE_NAME,
+  name: SLICE_NAMES.USER,
   initialState,
   reducers,
   extraReducers,

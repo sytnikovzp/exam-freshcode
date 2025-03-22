@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 
@@ -15,7 +15,7 @@ import CreateCatalog from '../CreateCatalog/CreateCatalog';
 
 import styles from './CatalogCreation.module.sass';
 
-class CatalogCreation extends React.Component {
+class CatalogCreation extends Component {
   componentDidMount() {
     this.props.getCatalogList();
   }

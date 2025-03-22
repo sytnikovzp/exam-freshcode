@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import CONSTANTS from '../../constants';
 
-const USER_PROFILE_SLICE_NAME = 'userProfile';
+import { SLICE_NAMES } from '../../constant';
 
 const initialState = {
   profileViewMode: CONSTANTS.USER_INFO_MODE,
@@ -19,7 +19,7 @@ const reducers = {
 };
 
 const userProfileSlice = createSlice({
-  name: USER_PROFILE_SLICE_NAME,
+  name: SLICE_NAMES.USER_PROFILE,
   initialState,
   reducers,
 });

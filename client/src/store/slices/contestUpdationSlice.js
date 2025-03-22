@@ -5,12 +5,12 @@ import {
   fulfilledReducer,
   pendingReducer,
   rejectedReducer,
-} from '../../utils/store';
+} from '../../utils/reduxUtils';
 import * as restController from '../../api/rest/restController';
 
-import { updateStoreAfterUpdateContest } from './contestByIdSlice';
+import { SLICE_NAMES } from '../../constant';
 
-const CONTEST_UPDATION_SLICE_NAME = 'contestUpdation';
+import { updateStoreAfterUpdateContest } from './contestByIdSlice';
 
 const initialState = {
   isFetching: true,
@@ -18,7 +18,7 @@ const initialState = {
 };
 
 export const updateContest = decorateAsyncThunk({
-  key: CONTEST_UPDATION_SLICE_NAME,
+  key: SLICE_NAMES.CONTEST_UPDATION,
   thunk: async (payload, { dispatch }) => {
     const { data } = await restController.updateContest(payload);
     dispatch(updateStoreAfterUpdateContest(data));
@@ -36,7 +36,7 @@ const extraReducers = (builder) => {
 };
 
 const contestUpdationSlice = createSlice({
-  name: CONTEST_UPDATION_SLICE_NAME,
+  name: SLICE_NAMES.CONTEST_UPDATION,
   initialState,
   reducers,
   extraReducers,

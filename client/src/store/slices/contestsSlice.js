@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import CONSTANTS from '../../constants';
-import { decorateAsyncThunk, pendingReducer } from '../../utils/store';
+import { decorateAsyncThunk, pendingReducer } from '../../utils/reduxUtils';
 import * as restController from '../../api/rest/restController';
 
-const CONTESTS_SLICE_NAME = 'contests';
+import { SLICE_NAMES } from '../../constant';
 
 const initialState = {
   isFetching: true,
@@ -22,7 +22,7 @@ const initialState = {
 };
 
 export const getContests = decorateAsyncThunk({
-  key: `${CONTESTS_SLICE_NAME}/getContests`,
+  key: `${SLICE_NAMES.CONTESTS}/getContests`,
   thunk: async ({ requestData, role }) => {
     const { data } =
       role === CONSTANTS.CUSTOMER
@@ -64,7 +64,7 @@ const extraReducers = (builder) => {
 };
 
 const contestsSlice = createSlice({
-  name: CONTESTS_SLICE_NAME,
+  name: SLICE_NAMES.CONTESTS,
   initialState,
   reducers,
   extraReducers,

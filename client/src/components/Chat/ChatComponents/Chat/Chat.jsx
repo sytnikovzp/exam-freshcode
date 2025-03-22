@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 
@@ -22,7 +22,7 @@ import DialogListContainer from '../../DialogComponents/DialogListContainer/Dial
 
 import styles from './Chat.module.sass';
 
-class Chat extends React.Component {
+class Chat extends Component {
   componentDidMount() {
     chatController.subscribeChat(this.props.userStore.data.id);
     this.props.getPreviewChat();

@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 
@@ -16,7 +16,7 @@ import TryAgain from '../TryAgain/TryAgain';
 
 import styles from './CustomerDashboard.module.sass';
 
-class CustomerDashboard extends React.Component {
+class CustomerDashboard extends Component {
   loadMore = (startFrom) => {
     this.props.getContests({
       limit: 8,

@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import LightBox from 'react-18-image-lightbox';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
@@ -30,7 +30,7 @@ import styles from './ContestPage.module.sass';
 
 import 'react-18-image-lightbox/style.css';
 
-class ContestPage extends React.Component {
+class ContestPage extends Component {
   componentWillUnmount() {
     this.props.changeEditContest(false);
   }

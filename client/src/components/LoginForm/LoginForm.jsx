@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
 import { Form, Formik } from 'formik';
 
@@ -12,7 +12,7 @@ import FormInput from '../FormInput/FormInput';
 
 import styles from './LoginForm.module.sass';
 
-class LoginForm extends React.Component {
+class LoginForm extends Component {
   componentWillUnmount() {
     this.props.authClear();
   }

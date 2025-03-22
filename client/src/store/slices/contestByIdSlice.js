@@ -5,10 +5,10 @@ import {
   createExtraReducers,
   decorateAsyncThunk,
   rejectedReducer,
-} from '../../utils/store';
+} from '../../utils/reduxUtils';
 import * as restController from '../../api/rest/restController';
 
-const CONTEST_BY_ID_SLICE_NAME = 'getContestById';
+import { SLICE_NAMES } from '../../constant';
 
 const initialState = {
   isFetching: true,
@@ -27,7 +27,7 @@ const initialState = {
 
 // ---------- getContestById
 export const getContestById = decorateAsyncThunk({
-  key: `${CONTEST_BY_ID_SLICE_NAME}/getContest`,
+  key: `${SLICE_NAMES.CONTEST_BY_ID}/getContest`,
   thunk: async (payload) => {
     const { data } = await restController.getContestById(payload);
     const { Offers } = data;
@@ -55,7 +55,7 @@ const getContestByIdExtraReducers = createExtraReducers({
 
 // ---------- addOffer
 export const addOffer = decorateAsyncThunk({
-  key: `${CONTEST_BY_ID_SLICE_NAME}/addOffer`,
+  key: `${SLICE_NAMES.CONTEST_BY_ID}/addOffer`,
   thunk: async (payload) => {
     const { data } = await restController.setNewOffer(payload);
     return data;
@@ -75,7 +75,7 @@ const addOfferExtraReducers = createExtraReducers({
 
 // ---------- setOfferStatus
 export const setOfferStatus = decorateAsyncThunk({
-  key: `${CONTEST_BY_ID_SLICE_NAME}/setOfferStatus`,
+  key: `${SLICE_NAMES.CONTEST_BY_ID}/setOfferStatus`,
   thunk: async (payload) => {
     const { data } = await restController.setOfferStatus(payload);
     return data;
@@ -104,7 +104,7 @@ const setOfferStatusExtraReducers = createExtraReducers({
 
 // ---------- changeMark
 export const changeMark = decorateAsyncThunk({
-  key: `${CONTEST_BY_ID_SLICE_NAME}/changeMark`,
+  key: `${SLICE_NAMES.CONTEST_BY_ID}/changeMark`,
   thunk: async (payload) => {
     const { data } = await restController.changeMark(payload);
     return { data, offerId: payload.offerId, mark: payload.mark };
@@ -167,7 +167,7 @@ const extraReducers = (builder) => {
 };
 
 const contestByIdSlice = createSlice({
-  name: CONTEST_BY_ID_SLICE_NAME,
+  name: SLICE_NAMES.CONTEST_BY_ID,
   initialState,
   reducers,
   extraReducers,

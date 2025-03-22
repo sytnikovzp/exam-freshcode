@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { decorateAsyncThunk, rejectedReducer } from '../../utils/store';
+import { decorateAsyncThunk, rejectedReducer } from '../../utils/reduxUtils';
 import * as restController from '../../api/rest/restController';
 
-const DATA_FOR_CONTEST_SLICE_NAME = 'dataForContest';
+import { SLICE_NAMES } from '../../constant';
 
 const initialState = {
   isFetching: true,
@@ -12,7 +12,7 @@ const initialState = {
 };
 
 export const getDataForContest = decorateAsyncThunk({
-  key: `${DATA_FOR_CONTEST_SLICE_NAME}/getDataForContest`,
+  key: `${SLICE_NAMES.DATA_FOR_CONTEST}/getDataForContest`,
   thunk: async (payload) => {
     const { data } = await restController.dataForContest(payload);
     return data;
@@ -33,7 +33,7 @@ const extraReducers = (builder) => {
 };
 
 const dataForContestSlice = createSlice({
-  name: `${DATA_FOR_CONTEST_SLICE_NAME}`,
+  name: `${SLICE_NAMES.DATA_FOR_CONTEST}`,
   initialState,
   reducers: {},
   extraReducers,
